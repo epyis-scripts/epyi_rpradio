@@ -7,3 +7,7 @@ Script de radio pour FiveM qui utilise l'API de radio de pma-voice.
 - Le menu de radio est fait avec la lib RageUI et est complètement configurable
 - Possibilité de facilement changer tous les messages de langue du script
 - Le script est optimisé (0.00ms/0.00%)
+
+# Quelques crédits pour
+- Frazzle : Pour les sons de la radio
+- iTexZoz : Pour la lib RageUI
