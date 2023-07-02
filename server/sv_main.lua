@@ -1,6 +1,6 @@
 -- # // CREDITS \\ # --
 Citizen.CreateThread(function()
-    print("^5epyi_rpradio ^4OpenSource RageUI RP-Radio script that use pma-voice and RageUI^0")
+    print("^5epyi_rpradio ^4OpenSource RageUI RP-Radio script that use pma-voice^0")
 end)
 
 -- # // RADOP AS ITEM \\ # --

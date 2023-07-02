@@ -4,8 +4,9 @@ local activeFrequency = 0
 local isRadioActive = false
 local isTalkingOnRadio = false
 local isPlayingTalkingAnim = false
-local animDictionary = {"random@arrests", "cellphone@str"}
-local animAnimation = {"generic_radio_chatter", "cellphone_call_listen_a"}
+local animDictionary = {"cellphone@", "cellphone@in_car@ds", "cellphone@str", "random@arrests"}
+local animAnimation = {"cellphone_text_in", "cellphone_text_out", "cellphone_call_listen_a", "generic_radio_chatter"}
+local propHandle = nil
 
 -- # // CHECK RESOURCE VALIDITY \\ # --
 if canStartResource then
@@ -14,6 +15,7 @@ if canStartResource then
         RMenu.Add('epyi_rpradio', 'main', RageUI.CreateMenu(Config.RageUI.menuTitle, Config.RageUI.menuSubtitle, Config.RageUI.marginLeft, Config.RageUI.marginTop))
         RMenu:Get('epyi_rpradio', 'main').Closed = function()
             isRadioMenuOpened = false
+            closeRadioMenuAnimation()
         end;
         RMenu:Get("epyi_rpradio", "main"):SetRectangleBanner(Config.RageUI.defaultBanner.colorR, Config.RageUI.defaultBanner.colorG, Config.RageUI.defaultBanner.colorB, Config.RageUI.defaultBanner.colorA)
     else
@@ -26,6 +28,7 @@ if canStartResource then
         RMenu.Add('epyi_rpradio', 'main', RageUI.CreateMenu(Config.RageUI.menuTitle, Config.RageUI.menuSubtitle, Config.RageUI.marginLeft, Config.RageUI.marginTop, Menuthing, Menuthing))
         RMenu:Get('epyi_rpradio', 'main').Closed = function()
             isRadioMenuOpened = false
+            closeRadioMenuAnimation()
         end;
     end
     -- # // MENU EVENT \\ # --
@@ -33,13 +36,54 @@ if canStartResource then
     AddEventHandler("epyi_rpradio:openMenu", function()
         openRadioMenu()
     end)
+    -- # // CLOSE MENU ANIMATION FUNCTION \\ # --
+    function closeRadioMenuAnimation()
+        DetachEntity(propHandle, true, false)
+        DeleteEntity(propHandle)
+        local player = PlayerPedId()
+        local player = PlayerPedId()
+        local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
+        local animationType = 1 + (isRadioMenuOpened and 0 or 1)
+        local dictionary = animDictionary[dictionaryType]
+        local animation = animAnimation[animationType]
+        while not HasAnimDictLoaded(dictionary) do
+            Citizen.Wait(100)
+        end
+        TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
+        Citizen.Wait(700)
+        StopAnimTask(player, dictionary, animation, 1.0)
+    end
+    function openRadioMenuAnimation()
+        local player = PlayerPedId()
+        local count = 0
+        local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
+        local animationType = 1 + (isRadioMenuOpened and 0 or 1)
+        local dictionary = animDictionary[dictionaryType]
+        local animation = animAnimation[animationType]
+        RequestModel(GetHashKey('prop_cs_hand_radio'))
+        while not HasModelLoaded(GetHashKey('prop_cs_hand_radio')) do
+            Citizen.Wait(100)
+        end
+        propHandle = CreateObject(GetHashKey('prop_cs_hand_radio'), 0.0, 0.0, 0.0, true, true, false)
+        local bone = GetPedBoneIndex(player, 28422)
+        SetCurrentPedWeapon(player, unarmed, true)
+        AttachEntityToEntity(propHandle, player, bone, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, false, false, false, 2, true)
+        RequestAnimDict(dictionary)
+        while not HasAnimDictLoaded(dictionary) do
+            Citizen.Wait(100)
+        end
+        TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
+    end
     -- # // MENU FUNCTION \\ # --
     function openRadioMenu()
         if isRadioMenuOpened then
             RageUI.CloseAll()
             isRadioMenuOpened = false
+            closeRadioMenuAnimation()
         else
             isRadioMenuOpened = true
+            openRadioMenuAnimation()
+            -- # // RAGEUI MENU \\ # --
             RageUI.Visible(RMenu:Get('epyi_rpradio', 'main'), true, true, false)
             while isRadioMenuOpened do
                 exports["pma-voice"]:setVoiceProperty("micClicks", Config.Radio.Sounds.radioClicks)
@@ -114,7 +158,7 @@ if canStartResource then
                     isTalkingOnRadio = value
                 end)
                 -- # // DEFINE THE ANIM TYPE \\ # --
-                local broadcastType = 1 + (isRadioMenuOpened and 1 or 0)
+                local broadcastType = 4 + (isRadioMenuOpened and -1 or 0)
                 local broadcastDictionary = animDictionary[broadcastType]
                 local broadcastAnimation = animAnimation[broadcastType]
                 -- # // PLAY ANIM WHEN TALKING \\ # --
