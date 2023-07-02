@@ -3,6 +3,9 @@ local isRadioMenuOpened = false
 local activeFrequency = 0
 local isRadioActive = false
 local isTalkingOnRadio = false
+local isPlayingTalkingAnim = false
+local animDictionary = {"random@arrests", "cellphone@str"}
+local animAnimation = {"generic_radio_chatter", "cellphone_call_listen_a"}
 
 -- # // CHECK RESOURCE VALIDITY \\ # --
 if canStartResource then
@@ -39,6 +42,7 @@ if canStartResource then
             isRadioMenuOpened = true
             RageUI.Visible(RMenu:Get('epyi_rpradio', 'main'), true, true, false)
             while isRadioMenuOpened do
+                exports["pma-voice"]:setVoiceProperty("micClicks", Config.Radio.Sounds.radioClicks)
                 local activeFrequencyString = nil
                 if activeFrequency == 0 then
                     activeFrequencyString = Locale.frequencyColor .. Locale.noFrequencySelectedMenu
@@ -58,7 +62,9 @@ if canStartResource then
                             if Selected then
                                 if activeFrequency ~= 0 then
                                     isRadioActive = true
-                                    SendNUIMessage({ sound = "audio_on", volume = 0.3})
+                                    if Config.Radio.Sounds.radioOn then
+                                        SendNUIMessage({ sound = "audio_on", volume = 0.3})
+                                    end
                                     exports["pma-voice"]:setRadioChannel(activeFrequency)
                                     exports["pma-voice"]:setVoiceProperty("radioEnabled", true)
                                 else
@@ -70,7 +76,9 @@ if canStartResource then
                         RageUI.ButtonWithStyle(Locale.disableRadio, Locale.disableRadioDescription, {}, true, function(Hovered, Active, Selected)
                             if Selected then
                                 isRadioActive = false
-                                SendNUIMessage({ sound = "audio_off", volume = 0.3})
+                                if Config.Radio.Sounds.radioOff then
+                                    SendNUIMessage({ sound = "audio_off", volume = 0.3})
+                                end
                                 exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
                             end
                         end)
@@ -99,14 +107,27 @@ if canStartResource then
     end
     Citizen.CreateThread(function()
         while true do
+            local player = PlayerPedId()
             if isRadioActive then
                 fpsBoost = false
                 AddEventHandler('pma-voice:radioActive', function(value)
                     isTalkingOnRadio = value
                 end)
+                -- # // DEFINE THE ANIM TYPE \\ # --
+                local broadcastType = 1 + (isRadioMenuOpened and 1 or 0)
+                local broadcastDictionary = animDictionary[broadcastType]
+                local broadcastAnimation = animAnimation[broadcastType]
                 -- # // PLAY ANIM WHEN TALKING \\ # --
-                if isTalkingOnRadio then
-                    ESX.ShowHelpNotification("JE PARLE")
+                if isTalkingOnRadio and not isPlayingTalkingAnim then
+                    isPlayingTalkingAnim = true
+                    RequestAnimDict(broadcastDictionary)
+                    while not HasAnimDictLoaded(broadcastDictionary) do
+                        Citizen.Wait(100)
+                    end
+                    TaskPlayAnim(player, broadcastDictionary, broadcastAnimation, 8.0, -8, -1, 49, 0, 0, 0, 0)
+                elseif not isTalkingOnRadio and isPlayingTalkingAnim then
+                    isPlayingTalkingAnim = false
+                    StopAnimTask(player, broadcastDictionary, broadcastAnimation, -4.0)
                 end
                 -- # // DISABLE RADIO IF PLAYER LOST THE ITEM \\ # --
                 if Config.Radio.useRadioAsItem then

@@ -5,6 +5,11 @@ Config = {
         openRadioMenuKeyValue = "F9", -- the key [string] -- > Set the key to open menu, you can set to nil to have only the item work6
         openRadioMenuKeyDesc = "Open the radio menu", -- description [string] -- > Set the description of the key
         maxFrequencySize = 3, -- number of digits [integer] -- > Set the maximum number of numbers in the frequency (example: 3 should be frequency like 374, 4 should be 7854, 5 should be 98763)
+        Sounds = {
+            radioOn = true, -- true/false [boolean] -- > Do you want the script play a sound when the radio is turned on ?
+            radioOff = true, -- true/false [boolean] -- > Do you want the script play a sound when the radio is turned off ?
+            radioClicks = true, -- true/false [boolean] -- > Do you want the script play a sound when the player is talking on the radio ?
+        },
     },
     RageUI = {
         menuTitle = "Radio menu", -- the menu title [string] -- > Set the menu title
@@ -34,10 +39,10 @@ Locale = {
     frequencySymbol = " Hz",
     frequencyColor = "~r~",
     textEntryDescription = "Please specify the ~r~new frequency",
-    enableRadio = "Switch on the radio",
-    enableRadioDescription = "Press ~r~[ENTER] ~s~to switch on the radio",
-    disableRadio = "Switch off the radio",
-    disableRadioDescription = "Press ~r~[ENTER] ~s~to switch off the radio",
+    enableRadio = "Turn on the radio",
+    enableRadioDescription = "Press ~r~[ENTER] ~s~to turn on the radio",
+    disableRadio = "Turn off the radio",
+    disableRadioDescription = "Press ~r~[ENTER] ~s~to turn off the radio",
     onlyNumbers = "You can only use number in the frequency.",
     firstCharacterError = "The first number of a frequency cannot be 0",
     radioState = "Radio status: ",
