@@ -28,10 +28,12 @@ client_scripts {
     "RageUI/menu/panels/*.lua",
     "RageUI/menu/windows/*.lua",
     "RageUI/menu/Function.lua",
+    "client/cl_verif.lua",
 	"client/cl_main.lua",
     "client/cl_functions.lua"
 }
 server_scripts {
+    "server/sv_verif.lua",
 	"server/sv_main.lua",
     "server/sv_functions.lua"
 }
