@@ -1,16 +1,12 @@
 -- # // VERSION CHECKER \\ # --
 Citizen.CreateThread( function()
-    updatePath = "/J4thgit/epyi_rpradio"
-    resourceName = "Epyi RP-Radio Script ("..GetCurrentResourceName()..")"
     function checkVersion(err,responseText, headers)
         curVersion = LoadResourceFile(GetCurrentResourceName(), "version")
         if curVersion ~= responseText and tonumber(curVersion) < tonumber(responseText) then
-            print("\n###############################")
-            print("\n"..resourceName.." is outdated, should be:\n"..responseText.."is:\n"..curVersion.."\nplease update it from https://github.com"..updatePath.."")
-            print("\n###############################")
+            print("^5epyi_rpradio ^4n'est pas à jour. La dernière version est "..responseText.." mais votre version est "..curVersion.." -- > Mettez la ressource à jour via ce lien github : https://github.com"..updatePath)
         elseif tonumber(curVersion) > tonumber(responseText) then
-            print("You somehow skipped a few versions of "..resourceName.." or the git went offline, if it's still online i advise you to update (or downgrade ?)")
+            print("^5epyi_rpradio ^4Il semble que le serveur de mise à jour soit inaccessible. Nous ne pouvons pas vérifier si la ressource est à jour.")
         end
     end
-    PerformHttpRequest("https://raw.githubusercontent.com"..updatePath.."/main/version", checkVersion, "GET")
+    PerformHttpRequest("https://raw.githubusercontent.com/J4thgit/epyi_rpradio/main/version", checkVersion, "GET")
 end)
