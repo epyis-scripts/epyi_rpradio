@@ -1,6 +1,8 @@
 # Radio script for FiveM: epyi_rpradio
 Radio script for FiveM which uses the pma-voice radio API.
 
+# Preview : https://youtu.be/lJUE6GWm6gM
+
 # Characteristics of the resource
 - Compatible only on ESX Legacy 1.7.5 and above
 - Possibility to have the radio as an item (If the radio disappears from the player's inventory, the radio automatically disconnects)
