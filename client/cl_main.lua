@@ -152,7 +152,7 @@ if canStartResource then
     Citizen.CreateThread(function()
         while true do
             local player = PlayerPedId()
-            if isRadioActive then
+            if isRadioActive or isRadioMenuOpened then
                 fpsBoost = false
                 AddEventHandler('pma-voice:radioActive', function(value)
                     isTalkingOnRadio = value
@@ -185,6 +185,15 @@ if canStartResource then
                             closeRadioMenuAnimation()
                         end
                     end, Config.Radio.radioItemName, 1)
+                end
+                -- # // DISABME RADIO IF PLAYER IS DEAD \\ # --
+                if IsEntityDead(player) then
+                    RageUI.CloseAll()
+                    exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
+                    isRadioMenuOpened = false
+                    activeFrequency = 0
+                    isRadioActive = false
+                    closeRadioMenuAnimation()
                 end
             end
             
