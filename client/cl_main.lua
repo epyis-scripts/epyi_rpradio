@@ -7,6 +7,8 @@ local isPlayingTalkingAnim = false
 local animDictionary = {"cellphone@", "cellphone@in_car@ds", "cellphone@str", "random@arrests"}
 local animAnimation = {"cellphone_text_in", "cellphone_text_out", "cellphone_call_listen_a", "generic_radio_chatter"}
 local propHandle = nil
+local radioVolumeArrayIndex = 11
+local radioVolumeArray = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100}
 
 -- # // CHECK RESOURCE VALIDITY \\ # --
 if canStartResource then
@@ -94,12 +96,14 @@ if canStartResource then
                     activeFrequencyString = Locale.frequencyColor .. activeFrequency .. Locale.frequencySymbol
                 end
                 RageUI.IsVisible(RMenu:Get('epyi_rpradio', 'main'), true, true, true, function()
+                    RageUI.Separator("")
                     if isRadioActive then
                         RageUI.Separator(Locale.radioState .. Locale.stateOn)
                     else
                         RageUI.Separator(Locale.radioState .. Locale.stateOff)
                     end
                     RageUI.Separator(Locale.radioFrequency .. activeFrequencyString)
+                    RageUI.Separator(Locale.radioVolume .. radioVolumeArray[radioVolumeArrayIndex] .. "%")
                     RageUI.Separator("")
                     if not isRadioActive then
                         RageUI.ButtonWithStyle(Locale.enableRadio, Locale.enableRadioDescription, {}, true, function(Hovered, Active, Selected)
@@ -143,6 +147,9 @@ if canStartResource then
                                 end
                             end
                         end
+                    end)
+                    RageUI.List('Changer le volume', radioVolumeArray, radioVolumeArrayIndex, "Permet de changer le volume de la radio", {}, true, function(Hovered, Active, Selected, Index)
+                        radioVolumeArrayIndex = Index
                     end)
                 end)
                 Citizen.Wait(1)
@@ -202,7 +209,7 @@ if canStartResource then
             if fpsBoost then
                 Citizen.Wait(1000)
             else
-                Citizen.Wait(1)
+                Citizen.Wait(100)
                 fpsBoost = true
             end
         end

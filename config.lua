@@ -48,6 +48,7 @@ Locale = {
     firstCharacterError = "The first number of a frequency cannot be 0",
     radioState = "Radio status: ",
     radioFrequency = "Radio active frequency: ",
+    radioVolume = "Radio volume: ~r~",
     stateOn = "~g~ON",
     stateOff = "~r~OFF",
 }
