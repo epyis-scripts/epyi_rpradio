@@ -103,7 +103,9 @@ if canStartResource then
                         RageUI.Separator(Locale.radioState .. Locale.stateOff)
                     end
                     RageUI.Separator(Locale.radioFrequency .. activeFrequencyString)
-                    RageUI.Separator(Locale.radioVolume .. radioVolumeArray[radioVolumeArrayIndex] .. "%")
+                    if Config.Radio.canChangeVolume then
+                        RageUI.Separator(Locale.radioVolume .. radioVolumeArray[radioVolumeArrayIndex] .. "%")
+                    end
                     RageUI.Separator("")
                     if not isRadioActive then
                         RageUI.ButtonWithStyle(Locale.enableRadio, Locale.enableRadioDescription, {}, true, function(Hovered, Active, Selected)
@@ -148,9 +150,11 @@ if canStartResource then
                             end
                         end
                     end)
-                    RageUI.List('Changer le volume', radioVolumeArray, radioVolumeArrayIndex, "Permet de changer le volume de la radio", {}, true, function(Hovered, Active, Selected, Index)
-                        radioVolumeArrayIndex = Index
-                    end)
+                    if Config.Radio.canChangeVolume then
+                        RageUI.List('Changer le volume', radioVolumeArray, radioVolumeArrayIndex, "Permet de changer le volume de la radio", {}, true, function(Hovered, Active, Selected, Index)
+                            radioVolumeArrayIndex = Index
+                        end)
+                    end
                 end)
                 Citizen.Wait(1)
             end

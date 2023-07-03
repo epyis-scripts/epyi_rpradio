@@ -6,6 +6,7 @@ Config = {
         openRadioMenuKeyDesc = "Open the radio menu", -- description [string] -- > Set the description of the key
         maxFrequencySize = 3, -- number of digits [integer] -- > Set the maximum number of numbers in the frequency (example: 3 should be frequency like 374, 4 should be frequency like 7854, 5 should be frequency like 98763)
         disconnectRadioOnDeath = true, -- true/false [boolean] -- > Do you want the radio to automatically disconnect when the player dies?
+        canChangeVolume = true, -- true/false [boolean] -- > Do you want players to be able to change their radio volume?
         Sounds = {
             radioOn = true, -- true/false [boolean] -- > Do you want the script play a sound when the radio is turned on ?
             radioOff = true, -- true/false [boolean] -- > Do you want the script play a sound when the radio is turned off ?
