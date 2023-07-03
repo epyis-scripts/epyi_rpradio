@@ -21,7 +21,7 @@ Config = {
         },
     },
     RageUI = {
-        menuTitle = "Radio menu", -- the menu title [string] -- > Set the menu title
+        menuTitle = "", -- the menu title [string] -- > Set the menu title
         menuSubtitle = "This is the menu for your radio", -- the menu subtitle [string] -- > Set the menu subtitle
         marginLeft = 10, -- the margin left [integer] -- > Set the margin between the left side of the screen and the right side of the menu
         marginTop = 10, -- the margin top [integer] -- > Set the margin between the top of the screen and the top of the menu

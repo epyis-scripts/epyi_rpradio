@@ -22,7 +22,7 @@ if canStartResource then
         RMenu:Get("epyi_rpradio", "main"):SetRectangleBanner(Config.RageUI.defaultBanner.colorR, Config.RageUI.defaultBanner.colorG, Config.RageUI.defaultBanner.colorB, Config.RageUI.defaultBanner.colorA)
     else
         local RuntimeTXD = CreateRuntimeTxd('Custom_Menu_Head')
-        local Object = CreateDui(Config.Menu.menuCustomBanner, Config.RageUI.customBanner.imageWidth, Config.RageUI.customBanner.imageHeight)
+        local Object = CreateDui(Config.RageUI.customBanner.url, Config.RageUI.customBanner.imageWidth, Config.RageUI.customBanner.imageHeight)
         _G.Object = Object
         local TextureThing = GetDuiHandle(Object)
         local Texture = CreateRuntimeTextureFromDuiHandle(RuntimeTXD, 'Custom_Menu_Head', TextureThing)
