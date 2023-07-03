@@ -151,7 +151,7 @@ if canStartResource then
                         end
                     end)
                     if Config.Radio.canChangeVolume then
-                        RageUI.List('Changer le volume', radioVolumeArray, radioVolumeArrayIndex, "Permet de changer le volume de la radio", {}, true, function(Hovered, Active, Selected, Index)
+                        RageUI.List(Locale.changeRadioVolume, radioVolumeArray, radioVolumeArrayIndex, Locale.changeRadioVolumeDescription, {}, true, function(Hovered, Active, Selected, Index)
                             radioVolumeArrayIndex = Index
                             if Active then
                                 exports['pma-voice']:setRadioVolume(radioVolumeArray[radioVolumeArrayIndex])
