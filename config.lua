@@ -12,6 +12,13 @@ Config = {
             radioOff = true, -- true/false [boolean] -- > Do you want the script play a sound when the radio is turned off ?
             radioClicks = true, -- true/false [boolean] -- > Do you want the script play a sound when the player is talking on the radio ?
         },
+        PrivateJobsFrequency = {
+            [1] = {"police", "fbi"},
+            [2] = {"police", "fbi"},
+            [3] = {"police", "fbi"},
+            [4] = {"ambulance", "police", "fbi"},
+            [5] = {"fbi"},
+        },
     },
     RageUI = {
         menuTitle = "Radio menu", -- the menu title [string] -- > Set the menu title
@@ -38,6 +45,7 @@ Locale = {
     changeFrequencyDescription = "Press ~r~[ENTER] ~s~to change the frequency of the radio",
     noFrequencySelectedMenu = "No frequency selected",
     noFrequencySelectedNotification = "You cannot turn the radio on if the frequency isn't set",
+    cantJoinFrequencyDueToPrivateFrequency = "You cannot connect to this radio frequency because it is private.",
     frequencySymbol = " Hz",
     frequencyColor = "~r~",
     textEntryDescription = "Please specify the ~r~new frequency",

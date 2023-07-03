@@ -142,7 +142,22 @@ if canStartResource then
                                     if firstCharacter == "0" then
                                         ESX.ShowNotification(Locale.firstCharacterError)
                                     else
-                                        activeFrequency = tonumber(newFrequency)
+                                        local canJoinFrequency = false
+                                        if Config.Radio.PrivateJobsFrequency[tonumber(newFrequency)] ~= nil then
+                                            local PlayerData = ESX.GetPlayerData()
+                                            for k,v in pairs(Config.Radio.PrivateJobsFrequency[tonumber(newFrequency)]) do
+                                                if v == PlayerData.job.name then
+                                                    canJoinFrequency = true
+                                                end
+                                            end
+                                        else
+                                            canJoinFrequency = true
+                                        end
+                                        if canJoinFrequency then
+                                            activeFrequency = tonumber(newFrequency)
+                                        else
+                                            ESX.ShowNotification(Locale.cantJoinFrequencyDueToPrivateFrequency)
+                                        end
                                     end
                                 else
                                     ESX.ShowNotification(Locale.onlyNumbers)
