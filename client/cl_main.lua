@@ -182,6 +182,7 @@ if canStartResource then
                             isRadioMenuOpened = false
                             activeFrequency = 0
                             isRadioActive = false
+                            closeRadioMenuAnimation()
                         end
                     end, Config.Radio.radioItemName, 1)
                 end
