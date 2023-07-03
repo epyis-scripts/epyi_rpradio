@@ -182,7 +182,6 @@ if canStartResource then
         while true do
             local player = PlayerPedId()
             if isRadioActive or isRadioMenuOpened then
-                fpsBoost = false
                 AddEventHandler('pma-voice:radioActive', function(value)
                     isTalkingOnRadio = value
                 end)
@@ -201,6 +200,13 @@ if canStartResource then
                 elseif not isTalkingOnRadio and isPlayingTalkingAnim then
                     isPlayingTalkingAnim = false
                     StopAnimTask(player, broadcastDictionary, broadcastAnimation, -4.0)
+                    if isRadioMenuOpened then
+                        local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
+                        local animationType = 1 + (isRadioMenuOpened and 0 or 1)
+                        local dictionary = animDictionary[dictionaryType]
+                        local animation = animAnimation[animationType]
+                        TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
+                    end
                 end
                 -- # // DISABLE RADIO IF PLAYER LOST THE ITEM \\ # --
                 if Config.Radio.useRadioAsItem then
@@ -227,13 +233,7 @@ if canStartResource then
                     end
                 end
             end
-            
-            if fpsBoost then
-                Citizen.Wait(1000)
-            else
-                Citizen.Wait(100)
-                fpsBoost = true
-            end
+            Citizen.Wait(1000)
         end
     end)
     -- # // KEY REGISTERING \\ # --
