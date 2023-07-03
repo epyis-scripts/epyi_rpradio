@@ -1,13 +1,14 @@
-# Script de radio pour FiveM : epyi_rpradio
-Script de radio pour FiveM qui utilise l'API de radio de pma-voice.
+# Radio script for FiveM: epyi_rpradio
+Radio script for FiveM which uses the pma-voice radio API.
 
-# Caractéristiques de la ressource
-- Compatible seulement sur ESX Legacy 1.7.5 et supérieur
-- Possibilité d'avoir la radio en item (Si la radio disparait de l'inventaire du joueur, la radio se déconnecte automatiquement)
-- Le menu de radio est fait avec la lib RageUI et est complètement configurable
-- Possibilité de facilement changer tous les messages de langue du script
-- Le script est optimisé (0.00ms/0.00%)
+# Characteristics of the resource
+- Compatible only on ESX Legacy 1.7.5 and above
+- Possibility to have the radio as an item (If the radio disappears from the player's inventory, the radio automatically disconnects)
+- The radio menu is made with the RageUI lib and is completely configurable
+- Ability to easily change all script language messages
+- Very customizable configuration
+- The script is optimized (0.00ms/0.00%)
 
-# Quelques crédits pour
-- Frazzle : Pour les sons de la radio
-- iTexZoz : Pour la lib RageUI
+# Some credits for
+- Frazzle: For radio sounds
+- iTexZoz: For the RageUI lib
