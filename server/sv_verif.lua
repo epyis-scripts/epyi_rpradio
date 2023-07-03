@@ -12,7 +12,7 @@ Citizen.CreateThread( function()
                 print("^5epyi_rpradio ^4It looks like github is offline. The resource uses github to check if it's up to date. This does not prevent the resource from working.")
             end
         else
-            print("^5epyi_rpradio ^4It looks like your ressource's version checker is broken. If you want to patch this, go download an official release of this script at https://github.com/J4thgit/epyi_rpradio")
+            print("^5epyi_rpradio ^4It looks like your ressource's version checker is broken. If you want to patch this, go download an official release of this script at -- > https://github.com/J4thgit/epyi_rpradio")
         end
     end
     PerformHttpRequest("https://raw.githubusercontent.com/J4thgit/epyi_rpradio/main/version", checkVersion, "GET")
