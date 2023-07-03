@@ -186,14 +186,16 @@ if canStartResource then
                         end
                     end, Config.Radio.radioItemName, 1)
                 end
-                -- # // DISABME RADIO IF PLAYER IS DEAD \\ # --
-                if IsEntityDead(player) then
-                    RageUI.CloseAll()
-                    exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
-                    isRadioMenuOpened = false
-                    activeFrequency = 0
-                    isRadioActive = false
-                    closeRadioMenuAnimation()
+                -- # // DISCONNECT RADIO IF PLAYER IS DEAD \\ # --
+                if Config.Radio.disconnectRadioOnDeath then
+                    if IsEntityDead(player) then
+                        RageUI.CloseAll()
+                        exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
+                        isRadioMenuOpened = false
+                        activeFrequency = 0
+                        isRadioActive = false
+                        closeRadioMenuAnimation()
+                    end
                 end
             end
             
