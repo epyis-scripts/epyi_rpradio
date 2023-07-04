@@ -29,11 +29,13 @@ client_scripts {
     "RageUI/menu/windows/*.lua",
     "RageUI/menu/Function.lua",
     "config.lua",
+    "locales/*.lua",
 	"client/cl_main.lua",
     "client/cl_utils.lua"
 }
 server_scripts {
     "config.lua",
+    "locales/*.lua",
     "server/sv_version.lua",
 	"server/sv_main.lua",
     "server/sv_utils.lua"

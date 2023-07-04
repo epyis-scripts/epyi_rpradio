@@ -1,4 +1,7 @@
 Config = {
+    Locale = {
+        usedLocale = "fr"; -- the locale prefix [string] -- > What language do you want the resource to use? (en/fr avalaible)
+    },
     Radio = {
         useRadioAsItem = true, -- true/false [boolean] -- > Do you want to use radio as item ?
         radioItemName = "radio", -- the item name [string] -- > If "useRadioAsItem" is true, set the radio item name
@@ -37,29 +40,4 @@ Config = {
             colorA = 100, -- alpha of the banner [integer] -- > If "customBanner.url" isn't set (nil value), set this to the alpha value (transparency) for the banner
         }
     }
-}
-
-Locale = {
-    missingRadioItem = "You don't have a radio in your inventory",
-    changeFrequency = "Change the radio frequency",
-    changeFrequencyDescription = "Press ~r~[ENTER] ~s~to change the frequency of the radio",
-    noFrequencySelectedMenu = "No frequency selected",
-    noFrequencySelectedNotification = "You cannot turn the radio on if the frequency isn't set",
-    cantJoinFrequencyDueToPrivateFrequency = "You cannot connect to this radio frequency because it is private.",
-    frequencySymbol = " Hz",
-    frequencyColor = "~r~",
-    textEntryDescription = "Please specify the ~r~new frequency",
-    enableRadio = "Turn on the radio",
-    enableRadioDescription = "Press ~r~[ENTER] ~s~to turn on the radio",
-    disableRadio = "Turn off the radio",
-    disableRadioDescription = "Press ~r~[ENTER] ~s~to turn off the radio",
-    changeRadioVolume = "Change the radio volume",
-    changeRadioVolumeDescription = "Use your ~r~keyboard arrows~s~ to change the radio volume",
-    onlyNumbers = "You can only use number in the frequency.",
-    firstCharacterError = "The first number of a frequency cannot be 0",
-    radioState = "Radio status: ",
-    radioFrequency = "Radio active frequency: ",
-    radioVolume = "Radio volume: ~r~",
-    stateOn = "~g~ON",
-    stateOff = "~r~OFF",
 }
