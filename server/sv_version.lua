@@ -1,7 +1,4 @@
 -- # // VERSION CHECKER \\ # --
--- # // VARIABLES INIT \\ # --
-canStartResource = false
-
 Citizen.CreateThread( function()
     function checkVersion(err,responseText, headers)
         curVersion = LoadResourceFile(GetCurrentResourceName(), "version")
@@ -17,10 +14,3 @@ Citizen.CreateThread( function()
     end
     PerformHttpRequest("https://raw.githubusercontent.com/J4thgit/epyi_rpradio/main/version", checkVersion, "GET")
 end)
-
--- # // CHECK THE RESOURCE NAME \\ # --
-if GetCurrentResourceName() == "epyi_rpradio" then
-    canStartResource = true
-else
-    canStartResource = false
-end

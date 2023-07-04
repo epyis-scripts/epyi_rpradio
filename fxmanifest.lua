@@ -29,15 +29,14 @@ client_scripts {
     "RageUI/menu/windows/*.lua",
     "RageUI/menu/Function.lua",
     "config.lua",
-    "client/cl_verif.lua",
 	"client/cl_main.lua",
-    "client/cl_functions.lua"
+    "client/cl_utils.lua"
 }
 server_scripts {
     "config.lua",
-    "server/sv_verif.lua",
+    "server/sv_version.lua",
 	"server/sv_main.lua",
-    "server/sv_functions.lua"
+    "server/sv_utils.lua"
 }
 
 dependencies {
