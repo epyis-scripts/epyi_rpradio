@@ -1,6 +1,6 @@
 Config = {
     Locale = {
-        usedLocale = "fr"; -- the locale prefix [string] -- > What language do you want the resource to use? (en/fr avalaible)
+        usedLocale = "en"; -- the locale prefix [string] -- > What language do you want the resource to use? (en/fr avalaible)
     },
     Radio = {
         useRadioAsItem = true, -- true/false [boolean] -- > Do you want to use radio as item ?
