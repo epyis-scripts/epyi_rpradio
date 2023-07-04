@@ -22,5 +22,8 @@ if Config.Locale.usedLocale == "fr" then
         radioVolume = "Volume de la radio: ~r~",
         stateOn = "~g~Allumée",
         stateOff = "~r~Eteinte",
+        menuTitle = "Menu de la radio",
+        menuSubtitle = "Menu de votre radio de poche",
+        openRadioMenuKeyDesc = "Ouvrir le menu de la radio",
     }
 end

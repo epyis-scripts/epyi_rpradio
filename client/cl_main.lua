@@ -11,7 +11,7 @@ local radioVolume = 100
 
 -- # // INIT RAGEUI MENU \\ # --
 if Config.RageUI.customBanner.url == nil then
-    RMenu.Add('epyi_rpradio', 'main', RageUI.CreateMenu(Config.RageUI.menuTitle, Config.RageUI.menuSubtitle, Config.RageUI.marginLeft, Config.RageUI.marginTop))
+    RMenu.Add('epyi_rpradio', 'main', RageUI.CreateMenu(Locale.menuTitle, Locale.menuSubtitle, Config.RageUI.marginLeft, Config.RageUI.marginTop))
     RMenu:Get('epyi_rpradio', 'main').Closed = function()
         isRadioMenuOpened = false
         closeRadioMenuAnimation()
@@ -24,7 +24,7 @@ else
     local TextureThing = GetDuiHandle(Object)
     local Texture = CreateRuntimeTextureFromDuiHandle(RuntimeTXD, 'Custom_Menu_Head', TextureThing)
     local Menuthing = "Custom_Menu_Head"
-    RMenu.Add('epyi_rpradio', 'main', RageUI.CreateMenu(Config.RageUI.menuTitle, Config.RageUI.menuSubtitle, Config.RageUI.marginLeft, Config.RageUI.marginTop, Menuthing, Menuthing))
+    RMenu.Add('epyi_rpradio', 'main', RageUI.CreateMenu(Locale.menuTitle, Locale.menuSubtitle, Config.RageUI.marginLeft, Config.RageUI.marginTop, Menuthing, Menuthing))
     RMenu:Get('epyi_rpradio', 'main').Closed = function()
         isRadioMenuOpened = false
         closeRadioMenuAnimation()
@@ -239,7 +239,7 @@ Citizen.CreateThread(function()
 end)
 -- # // KEY REGISTERING \\ # --
 if Config.Radio.openRadioMenuKeyValue ~= nil then
-    Keys.Register(Config.Radio.openRadioMenuKeyValue, "-openRadioMenu", Config.Radio.openRadioMenuKeyDesc, function()
+    Keys.Register(Config.Radio.openRadioMenuKeyValue, "-openRadioMenu", Locale.openRadioMenuKeyDesc, function()
         if Config.Radio.useRadioAsItem then
             ESX.TriggerServerCallback("epyi_rpradio:hasItem", function(result)
                 if result then

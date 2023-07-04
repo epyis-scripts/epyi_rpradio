@@ -22,5 +22,8 @@ if Config.Locale.usedLocale == "en" then
         radioVolume = "Radio volume: ~r~",
         stateOn = "~g~ON",
         stateOff = "~r~OFF",
+        menuTitle = "Radio menu",
+        menuSubtitle = "Menu of your pocket radio",
+        openRadioMenuKeyDesc = "Open the radio menu",
     }
 end
