@@ -1,35 +1,51 @@
--- # // VARIABLES INIT \\ --
+-- Variables initialization
+-- init some local variables
 local isRadioMenuOpened = false
 local activeFrequency = 0
 local isRadioActive = false
 local isTalkingOnRadio = false
 local isPlayingTalkingAnim = false
-local animDictionary = {"cellphone@", "cellphone@in_car@ds", "cellphone@str", "random@arrests"}
-local animAnimation = {"cellphone_text_in", "cellphone_text_out", "cellphone_call_listen_a", "generic_radio_chatter"}
+local animDictionary = { "cellphone@", "cellphone@in_car@ds", "cellphone@str", "random@arrests" }
+local animAnimation = { "cellphone_text_in", "cellphone_text_out", "cellphone_call_listen_a", "generic_radio_chatter" }
 local propHandle = nil
 local radioVolume = 100
 
--- # // INIT RAGEUI MENU \\ # --
-if Config.RageUI.customBanner.url == nil then
-    RMenu.Add('epyi_rpradio', 'main', RageUI.CreateMenu(Locale.menuTitle, Locale.menuSubtitle, Config.RageUI.marginLeft, Config.RageUI.marginTop))
-    RMenu:Get('epyi_rpradio', 'main').Closed = function()
-        isRadioMenuOpened = false
-        closeRadioMenuAnimation()
-    end;
-    RMenu:Get("epyi_rpradio", "main"):SetRectangleBanner(Config.RageUI.defaultBanner.colorR, Config.RageUI.defaultBanner.colorG, Config.RageUI.defaultBanner.colorB, Config.RageUI.defaultBanner.colorA)
-else
-    local RuntimeTXD = CreateRuntimeTxd('Custom_Menu_Head')
-    local Object = CreateDui(Config.RageUI.customBanner.url, Config.RageUI.customBanner.imageWidth, Config.RageUI.customBanner.imageHeight)
-    _G.Object = Object
-    local TextureThing = GetDuiHandle(Object)
-    local Texture = CreateRuntimeTextureFromDuiHandle(RuntimeTXD, 'Custom_Menu_Head', TextureThing)
-    local Menuthing = "Custom_Menu_Head"
-    RMenu.Add('epyi_rpradio', 'main', RageUI.CreateMenu(Locale.menuTitle, Locale.menuSubtitle, Config.RageUI.marginLeft, Config.RageUI.marginTop, Menuthing, Menuthing))
-    RMenu:Get('epyi_rpradio', 'main').Closed = function()
-        isRadioMenuOpened = false
-        closeRadioMenuAnimation()
-    end;
+-- Menu texture initialization
+-- create the menu texture with the config parameters
+if Config.RageUI.customBanner.url ~= nil then
+	local Object = CreateDui(
+		Config.RageUI.customBanner.url,
+		Config.RageUI.customBanner.imageWidth,
+		Config.RageUI.customBanner.imageHeight
+	)
+	_G.Object = Object
+	menuTexture = "Custom_Menu_Head"
 end
+
+-- RageUI menu initialization
+-- init the rageui menu with the config parameters
+RMenu.Add(
+	"epyi_rpradio",
+	"main",
+	RageUI.CreateMenu(
+		Locale.menuTitle,
+		Locale.menuSubtitle,
+		Config.RageUI.marginLeft,
+		Config.RageUI.marginTop,
+		menuTexture,
+		menuTexture
+	)
+)
+RMenu:Get("epyi_rpradio", "main").Closed = function()
+	isRadioMenuOpened = false
+end
+RMenu:Get("epyi_rpradio", "main"):SetRectangleBanner(
+	Config.RageUI.defaultBanner.colorR,
+	Config.RageUI.defaultBanner.colorG,
+	Config.RageUI.defaultBanner.colorB,
+	Config.RageUI.defaultBanner.colorA
+)
+
 -- # // MENU EVENT \\ # --
 RegisterNetEvent("epyi_rpradio:openMenu")
 AddEventHandler("epyi_rpradio:openMenu", function()
