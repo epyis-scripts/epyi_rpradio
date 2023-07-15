@@ -46,47 +46,54 @@ RMenu:Get("epyi_rpradio", "main"):SetRectangleBanner(
 	Config.RageUI.defaultBanner.colorA
 )
 
--- # // MENU EVENT \\ # --
+---epyi_rpradio:openMenu [EVENT] → Execute the openMenu function
+---@return void
 RegisterNetEvent("epyi_rpradio:openMenu")
 AddEventHandler("epyi_rpradio:openMenu", function()
-    openRadioMenu()
+	openRadioMenu()
 end)
--- # // CLOSE MENU ANIMATION FUNCTION \\ # --
+
+---closeRadioMenuAnimation [FUNCTION] → Play animation when closing radio menu
+---@return void
 function closeRadioMenuAnimation()
-    DetachEntity(propHandle, true, false)
-    DeleteEntity(propHandle)
-    local player = PlayerPedId()
-    local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
-    local animationType = 1 + (isRadioMenuOpened and 0 or 1)
-    local dictionary = animDictionary[dictionaryType]
-    local animation = animAnimation[animationType]
-    while not HasAnimDictLoaded(dictionary) do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
-    Citizen.Wait(700)
-    StopAnimTask(player, dictionary, animation, 1.0)
+	DetachEntity(propHandle, true, false)
+	DeleteEntity(propHandle)
+	local player = PlayerPedId()
+	local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
+	local animationType = 1 + (isRadioMenuOpened and 0 or 1)
+	local dictionary = animDictionary[dictionaryType]
+	local animation = animAnimation[animationType]
+	while not HasAnimDictLoaded(dictionary) do
+		Citizen.Wait(100)
+	end
+	TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
+	Citizen.Wait(700)
+	StopAnimTask(player, dictionary, animation, 1.0)
 end
+
+---openRadioMenuAnimation [FUNCTION] → Play animation when openning the radio menu
+---@return void
 function openRadioMenuAnimation()
-    local player = PlayerPedId()
-    local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
-    local animationType = 1 + (isRadioMenuOpened and 0 or 1)
-    local dictionary = animDictionary[dictionaryType]
-    local animation = animAnimation[animationType]
-    RequestModel(GetHashKey('prop_cs_hand_radio'))
-    while not HasModelLoaded(GetHashKey('prop_cs_hand_radio')) do
-        Citizen.Wait(100)
-    end
-    propHandle = CreateObject(GetHashKey('prop_cs_hand_radio'), 0.0, 0.0, 0.0, true, true, false)
-    local bone = GetPedBoneIndex(player, 28422)
-    SetCurrentPedWeapon(player, unarmed, true)
-    AttachEntityToEntity(propHandle, player, bone, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, false, false, false, 2, true)
-    RequestAnimDict(dictionary)
-    while not HasAnimDictLoaded(dictionary) do
-        Citizen.Wait(100)
-    end
-    TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
+	local player = PlayerPedId()
+	local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
+	local animationType = 1 + (isRadioMenuOpened and 0 or 1)
+	local dictionary = animDictionary[dictionaryType]
+	local animation = animAnimation[animationType]
+	RequestModel(GetHashKey("prop_cs_hand_radio"))
+	while not HasModelLoaded(GetHashKey("prop_cs_hand_radio")) do
+		Citizen.Wait(100)
+	end
+	propHandle = CreateObject(GetHashKey("prop_cs_hand_radio"), 0.0, 0.0, 0.0, true, true, false)
+	local bone = GetPedBoneIndex(player, 28422)
+	SetCurrentPedWeapon(player, unarmed, true)
+	AttachEntityToEntity(propHandle, player, bone, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, false, false, false, 2, true)
+	RequestAnimDict(dictionary)
+	while not HasAnimDictLoaded(dictionary) do
+		Citizen.Wait(100)
+	end
+	TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
 end
+
 -- # // MENU FUNCTION \\ # --
 function openRadioMenu()
     if isRadioMenuOpened then
