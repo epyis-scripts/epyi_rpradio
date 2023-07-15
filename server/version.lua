@@ -14,7 +14,7 @@ Citizen.CreateThread(function()
 					.. responseText
 					.. " but you are on release "
 					.. curVersion
-					.. " -- > https://github.com/J4thgit/epyi_rpradio"
+					.. " → https://raw.githubusercontent.com/epyis-scripts/epyi_rpradio"
 			)
 		elseif tonumber(curVersion) > tonumber(responseText) then
 			print(
