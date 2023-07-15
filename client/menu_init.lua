@@ -58,7 +58,7 @@ function openMenu()
 	else
 		isMenuOpened = true
 		OpenRadioMenuAnimation()
-		RageUI.Visible(RMenu:Get("epyi_rpradio", "main"), true, true, false)
+		RageUI.Visible(RMenu:Get("epyi_rpradio", "main"), true)
 		while isMenuOpened do
 			exports["pma-voice"]:setVoiceProperty("micClicks", Config.Radio.Sounds.radioClicks)
 			if activeFrequency == 0 then
@@ -66,7 +66,7 @@ function openMenu()
 			else
 				activeFrequencyString = _("frequency_color") .. activeFrequency .. _("frequency_symbol")
 			end
-			RageUI.IsVisible(RMenu:Get("epyi_rpradio", "main"), true, true, true, function()
+			RageUI.IsVisible(RMenu:Get("epyi_rpradio", "main"), Config.MenuStyle.BannerStyle.UseHeader, Config.MenuStyle.BannerStyle.UseGlareEffect, Config.MenuStyle.BannerStyle.UseInstructionalButtons, function()
 				main_showContentThisFrame()
 			end)
 			Citizen.Wait(1)
