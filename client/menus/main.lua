@@ -13,42 +13,30 @@ function main_showContentThisFrame()
 	end
 	RageUI.Separator("")
 	if not isRadioActive then
-		RageUI.ButtonWithStyle(
-			_U("enable_radio"),
-			_U("enable_radio_desc"),
-			{},
-			true,
-			function(_, _, Selected)
-				if Selected then
-					if activeFrequency ~= 0 then
-						isRadioActive = true
-						if Config.Radio.Sounds.radioOn then
-							SendNUIMessage({ sound = "audio_on", volume = 0.3 })
-						end
-						exports["pma-voice"]:setRadioChannel(activeFrequency)
-						exports["pma-voice"]:setVoiceProperty("radioEnabled", true)
-					else
-						ESX.ShowNotification(_U("no_frequency_selected_notif"))
-					end
+		RageUI.ButtonWithStyle(_U("enable_radio"), _U("enable_radio_desc"), {}, true, function(_, _, Selected)
+			if Selected then
+				if activeFrequency == 0 then
+					ESX.ShowNotification(_U("no_frequency_selected_notif"))
+					return
 				end
+				isRadioActive = true
+				if Config.Radio.Sounds.radioOn then
+					SendNUIMessage({ sound = "audio_on", volume = 0.3 })
+				end
+				exports["pma-voice"]:setRadioChannel(activeFrequency)
+				exports["pma-voice"]:setVoiceProperty("radioEnabled", true)
 			end
-		)
+		end)
 	else
-		RageUI.ButtonWithStyle(
-			_U("disable_radio"),
-			_U("disable_radio_desc"),
-			{},
-			true,
-			function(_, _, Selected)
-				if Selected then
-					isRadioActive = false
-					if Config.Radio.Sounds.radioOff then
-						SendNUIMessage({ sound = "audio_off", volume = 0.3 })
-					end
-					exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
+		RageUI.ButtonWithStyle(_U("disable_radio"), _U("disable_radio_desc"), {}, true, function(_, _, Selected)
+			if Selected then
+				isRadioActive = false
+				if Config.Radio.Sounds.radioOff then
+					SendNUIMessage({ sound = "audio_off", volume = 0.3 })
 				end
+				exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
 			end
-		)
+		end)
 	end
 	RageUI.ButtonWithStyle(
 		_U("change_frequency"),
@@ -58,33 +46,34 @@ function main_showContentThisFrame()
 		function(_, _, Selected)
 			if Selected then
 				local newFrequency = TextEntry(_U("text_entry_desc"), "", Config.Radio.maxFrequencySize)
-				if newFrequency ~= nil then
-					if OnlyContainNumber(newFrequency) then
-						local firstCharacter = string.sub(newFrequency, 1, 1)
-						if firstCharacter == "0" then
-							ESX.ShowNotification(_U("first_character_error"))
-						else
-							local canJoinFrequency = false
-							if Config.Radio.PrivateJobsFrequency[tonumber(newFrequency)] ~= nil then
-								local PlayerData = ESX.GetPlayerData()
-								for k, v in pairs(Config.Radio.PrivateJobsFrequency[tonumber(newFrequency)]) do
-									if v == PlayerData.job.name then
-										canJoinFrequency = true
-									end
-								end
-							else
-								canJoinFrequency = true
-							end
-							if canJoinFrequency then
-								activeFrequency = tonumber(newFrequency)
-							else
-								ESX.ShowNotification(_U("cant_join_frequency"))
-							end
-						end
-					else
-						ESX.ShowNotification(_U("only_numbers"))
-					end
+				if newFrequency == nil then
+					return
 				end
+				if not OnlyContainNumber(newFrequency) then
+					ESX.ShowNotification(_U("only_numbers"))
+					return
+				end
+				local firstCharacter = string.sub(newFrequency, 1, 1)
+				if firstCharacter == "0" then
+					ESX.ShowNotification(_U("first_character_error"))
+					return
+				end
+				local canJoinFrequency = false
+				if Config.Radio.PrivateJobsFrequency[tonumber(newFrequency)] ~= nil then
+					local PlayerData = ESX.GetPlayerData()
+					for _, v in pairs(Config.Radio.PrivateJobsFrequency[tonumber(newFrequency)]) do
+						if v == PlayerData.job.name then
+							canJoinFrequency = true
+						end
+					end
+				else
+					canJoinFrequency = true
+				end
+				if not canJoinFrequency then
+					ESX.ShowNotification(_U("cant_join_frequency"))
+					return
+				end
+				activeFrequency = tonumber(newFrequency)
 			end
 		end
 	)
@@ -104,7 +93,4 @@ function main_showContentThisFrame()
 			end
 		)
 	end
-end
-
-for k,v in ipairs() do
 end
