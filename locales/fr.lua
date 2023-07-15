@@ -1,5 +1,5 @@
 Locales["fr"] = {
-	["missingRadioItem"] = "Vous n'avez pas de radio dans votre inventaire",
+	["missing_radio_item"] = "Vous n'avez pas de radio dans votre inventaire",
 	["changeFrequency"] = "Changer la fréquence",
 	["changeFrequencyDescription"] = "Appuyez sur ~r~[ENTER] ~s~pour changer la fréquence de la radio",
 	["noFrequencySelectedMenu"] = "Aucune fréquence",
@@ -23,5 +23,5 @@ Locales["fr"] = {
 	["stateOff"] = "~r~Eteinte",
 	["menuTitle"] = "Menu de la radio",
 	["menuSubtitle"] = "Menu de votre radio de poche",
-	["openRadioMenuKeyDesc"] = "Ouvrir le menu de la radio",
+	["key_description"] = "Ouvrir le menu de la radio",
 }

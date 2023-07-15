@@ -1,5 +1,5 @@
 Locales["en"] = {
-	["missingRadioItem"] = "You don't have a radio in your inventory",
+	["missing_radio_item"] = "You don't have a radio in your inventory",
 	["changeFrequency"] = "Change the radio frequency",
 	["changeFrequencyDescription"] = "Press ~r~[ENTER] ~s~to change the frequency of the radio",
 	["noFrequencySelectedMenu"] = "No frequency selected",
@@ -23,5 +23,5 @@ Locales["en"] = {
 	["stateOff"] = "~r~OFF",
 	["menuTitle"] = "Radio menu",
 	["menuSubtitle"] = "Menu of your pocket radio",
-	["openRadioMenuKeyDesc"] = "Open the radio menu",
+	["key_description"] = "Open the radio menu",
 }

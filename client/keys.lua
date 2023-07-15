@@ -1,15 +1,16 @@
-if Config.Radio.openRadioMenuKeyValue ~= nil then
-	Keys.Register(Config.Radio.openRadioMenuKeyValue, "-openRadioMenu", Locale.openRadioMenuKeyDesc, function()
-		if Config.Radio.useRadioAsItem then
-			ESX.TriggerServerCallback("epyi_rpradio:hasItem", function(result)
-				if result then
-					openRadioMenu()
-				else
-					ESX.ShowNotification(Locale.missingRadioItem)
-				end
-			end, Config.Radio.radioItemName, 1)
-		else
+-- Key registering
+if Config.Radio.Key ~= nil then
+	Keys.Register(Config.Radio.key, "-openRadioMenu", TranslateCap("key_description"), function()
+		if not Config.Radio.useRadioAsItem then
 			openRadioMenu()
+			return
 		end
+		ESX.TriggerServerCallback("epyi_rpradio:hasItem", function(result)
+			if not result then
+				ESX.ShowNotification(TranslateCap("missing_radio_item"))
+				return
+			end
+			openRadioMenu()
+		end, Config.Radio.radioItemName, 1)
 	end)
 end
