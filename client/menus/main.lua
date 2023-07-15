@@ -9,13 +9,13 @@ function main_showContentThisFrame()
 	end
 	RageUI.Separator(TranslateCap("radio_frequency") .. activeFrequencyString)
 	if Config.Radio.canChangeVolume then
-		RageUI.Separator(Locale.radioVolume .. radioVolume .. "%")
+		RageUI.Separator(_U("radio_volume") .. radioVolume .. "%")
 	end
 	RageUI.Separator("")
 	if not isRadioActive then
 		RageUI.ButtonWithStyle(
-			Locale.enableRadio,
-			Locale.enableRadioDescription,
+			_U("enable_radio"),
+			_U("enable_radio_desc"),
 			{},
 			true,
 			function(_, _, Selected)
@@ -28,15 +28,15 @@ function main_showContentThisFrame()
 						exports["pma-voice"]:setRadioChannel(activeFrequency)
 						exports["pma-voice"]:setVoiceProperty("radioEnabled", true)
 					else
-						ESX.ShowNotification(Locale.noFrequencySelectedNotification)
+						ESX.ShowNotification(_U("no_frequency_selected_notif"))
 					end
 				end
 			end
 		)
 	else
 		RageUI.ButtonWithStyle(
-			Locale.disableRadio,
-			Locale.disableRadioDescription,
+			_U("disable_radio"),
+			_U("disable_radio_desc"),
 			{},
 			true,
 			function(_, _, Selected)
@@ -51,18 +51,18 @@ function main_showContentThisFrame()
 		)
 	end
 	RageUI.ButtonWithStyle(
-		Locale.changeFrequency,
-		Locale.changeFrequencyDescription,
+		_U("change_frequency"),
+		_U("change_frequency_desc"),
 		{},
 		not isRadioActive,
 		function(_, _, Selected)
 			if Selected then
-				local newFrequency = TextEntry(Locale.textEntryDescription, "", Config.Radio.maxFrequencySize)
+				local newFrequency = TextEntry(_U("text_entry_desc"), "", Config.Radio.maxFrequencySize)
 				if newFrequency ~= nil then
 					if OnlyContainNumber(newFrequency) then
 						local firstCharacter = string.sub(newFrequency, 1, 1)
 						if firstCharacter == "0" then
-							ESX.ShowNotification(Locale.firstCharacterError)
+							ESX.ShowNotification(_U("first_character_error"))
 						else
 							local canJoinFrequency = false
 							if Config.Radio.PrivateJobsFrequency[tonumber(newFrequency)] ~= nil then
@@ -78,11 +78,11 @@ function main_showContentThisFrame()
 							if canJoinFrequency then
 								activeFrequency = tonumber(newFrequency)
 							else
-								ESX.ShowNotification(Locale.cantJoinFrequencyDueToPrivateFrequency)
+								ESX.ShowNotification(_U("cant_join_frequency"))
 							end
 						end
 					else
-						ESX.ShowNotification(Locale.onlyNumbers)
+						ESX.ShowNotification(_U("only_numbers"))
 					end
 				end
 			end
@@ -90,10 +90,10 @@ function main_showContentThisFrame()
 	)
 	if Config.Radio.canChangeVolume then
 		RageUI.Progress(
-			Locale.changeRadioVolume .. " (" .. radioVolume .. "%)",
+			_U("change_radio_volume") .. " (" .. radioVolume .. "%)",
 			radioVolume / 10,
 			10,
-			Locale.changeRadioVolumeDescription,
+			_U("change_radio_volume_desc"),
 			true,
 			true,
 			function(_, Active, _, Index)

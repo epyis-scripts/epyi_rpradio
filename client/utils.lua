@@ -76,3 +76,67 @@ function OpenRadioMenuAnimation()
 	end
 	TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
 end
+
+---DisconnectRadioIfDead
+---@param player ped
+---@return void
+function DisconnectRadioIfDead(player)
+	if not Config.Radio.disconnectRadioOnDeath then
+		return
+	end
+	if not IsEntityDead(player) then
+		return
+	end
+	RageUI.CloseAll()
+	isMenuOpened = false
+	exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
+	activeFrequency = 0
+	isRadioActive = false
+	closeRadioMenuAnimation()
+end
+
+---DisconnectIfNoItem
+---@return void
+function DisconnectIfNoItem()
+	if not Config.Radio.useRadioAsItem then
+		return
+	end
+	ESX.TriggerServerCallback("epyi_rpradio:hasItem", function(result)
+		if result then
+			return
+		end
+		RageUI.CloseAll()
+		exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
+		isMenuOpened = false
+		activeFrequency = 0
+		isRadioActive = false
+		closeRadioMenuAnimation()
+	end, Config.Radio.radioItemName, 1)
+end
+
+---PlayAnimWhenTalking
+---@param player ped
+---@return void
+function PlayAnimWhenTalking(player)
+	local broadcastType = 4 + (isMenuOpened and -1 or 0)
+	local broadcastDictionary = animDictionary[broadcastType]
+	local broadcastAnimation = animAnimation[broadcastType]
+	if isTalkingOnRadio and not isPlayingTalkingAnim then
+		isPlayingTalkingAnim = true
+		RequestAnimDict(broadcastDictionary)
+		while not HasAnimDictLoaded(broadcastDictionary) do
+			Citizen.Wait(100)
+		end
+		TaskPlayAnim(player, broadcastDictionary, broadcastAnimation, 8.0, -8, -1, 49, 0, 0, 0, 0)
+	elseif not isTalkingOnRadio and isPlayingTalkingAnim then
+		isPlayingTalkingAnim = false
+		StopAnimTask(player, broadcastDictionary, broadcastAnimation, -4.0)
+		if isMenuOpened then
+			local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
+			local animationType = 1 + (isMenuOpened and 0 or 1)
+			local dictionary = animDictionary[dictionaryType]
+			local animation = animAnimation[animationType]
+			TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
+		end
+	end
+end

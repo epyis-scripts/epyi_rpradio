@@ -29,8 +29,8 @@ RMenu.Add(
 	"epyi_rpradio",
 	"main",
 	RageUI.CreateMenu(
-		Locale.menuTitle,
-		Locale.menuSubtitle,
+		_("menu_title"),
+		_("menu_subtitle"),
 		Config.RageUI.marginLeft,
 		Config.RageUI.marginTop,
 		menuTexture,
@@ -53,16 +53,17 @@ function openMenu()
     if isMenuOpened then
         RageUI.CloseAll()
         isMenuOpened = false
+		CloseRadioMenuAnimation()
     else
         isMenuOpened = true
-        openRadioMenuAnimation()
+        OpenRadioMenuAnimation()
         RageUI.Visible(RMenu:Get('epyi_rpradio', 'main'), true, true, false)
         while isMenuOpened do
             exports["pma-voice"]:setVoiceProperty("micClicks", Config.Radio.Sounds.radioClicks)
             if activeFrequency == 0 then
-                activeFrequencyString = _("frequency_color") .. _("no_frequency_selected_menu")
+                activeFrequencyString = _("frequency_color") .. _U("no_frequency_selected_menu")
             else
-                activeFrequencyString = Locale.frequencyColor .. activeFrequency .. Locale.frequencySymbol
+                activeFrequencyString = _("frequency_color") .. activeFrequency .. _("frequency_symbol")
             end
             RageUI.IsVisible(RMenu:Get('epyi_rpradio', 'main'), true, true, true, function()
                 main_showContentThisFrame()
