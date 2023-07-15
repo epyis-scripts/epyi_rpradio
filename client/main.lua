@@ -12,9 +12,9 @@ Citizen.CreateThread(function()
 		end
 		if fpsBoost then
 			Citizen.Wait(1000)
-			return
+		else
+			Citizen.Wait(100)
+			fpsBoost = true
 		end
-		Citizen.Wait(100)
-		fpsBoost = true
 	end
 end)

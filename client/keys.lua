@@ -1,8 +1,8 @@
 -- Key registering
-if Config.Radio.Key ~= nil then
+if Config.Radio.key ~= nil then
 	Keys.Register(Config.Radio.key, "-openRadioMenu", _U("key_desc"), function()
 		if not Config.Radio.useRadioAsItem then
-			openRadioMenu()
+			openMenu()
 			return
 		end
 		ESX.TriggerServerCallback("epyi_rpradio:hasItem", function(result)
@@ -10,7 +10,7 @@ if Config.Radio.Key ~= nil then
 				ESX.ShowNotification(_U("missing_radio_item"))
 				return
 			end
-			openRadioMenu()
+			openMenu()
 		end, Config.Radio.radioItemName, 1)
 	end)
 end

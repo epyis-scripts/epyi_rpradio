@@ -33,7 +33,7 @@ end
 ---@return void
 RegisterNetEvent("epyi_rpradio:OpenMenu")
 AddEventHandler("epyi_rpradio:OpenMenu", function()
-	openRadioMenu()
+	openMenu()
 end)
 
 ---CloseRadioMenuAnimation → Play animation when closing radio menu
@@ -92,7 +92,7 @@ function DisconnectRadioIfDead(player)
 	exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
 	activeFrequency = 0
 	isRadioActive = false
-	closeRadioMenuAnimation()
+	CloseRadioMenuAnimation()
 end
 
 ---DisconnectIfNoItem
@@ -110,7 +110,7 @@ function DisconnectIfNoItem()
 		isMenuOpened = false
 		activeFrequency = 0
 		isRadioActive = false
-		closeRadioMenuAnimation()
+		CloseRadioMenuAnimation()
 	end, Config.Radio.radioItemName, 1)
 end
 

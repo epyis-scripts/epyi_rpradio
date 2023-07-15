@@ -15,7 +15,11 @@ files({
 })
 
 shared_scripts({
+	"shared/locale.lua",
+	"locales/*.lua",
+
 	"@es_extended/imports.lua",
+	"config.lua",
 })
 
 client_scripts({
@@ -29,19 +33,17 @@ client_scripts({
 	"RageUI/menu/panels/*.lua",
 	"RageUI/menu/windows/*.lua",
 	"RageUI/menu/Function.lua",
-    
-	"config.lua",
-	"locales/*.lua",
-	"client/cl_main.lua",
-	"client/cl_utils.lua",
+
+	"client/menu_init.lua",
+	"client/keys.lua",
+	"client/main.lua",
+	"client/utils.lua",
+	"client/menus/main.lua",
 })
 
 server_scripts({
-	"config.lua",
-	"locales/*.lua",
-	"server/sv_version.lua",
-	"server/sv_main.lua",
-	"server/sv_utils.lua",
+	"server/version.lua",
+	"server/main.lua",
 })
 
 dependencies({
