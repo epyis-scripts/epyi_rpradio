@@ -15,5 +15,6 @@ Citizen.CreateThread(function()
 			return
 		end
 		Citizen.Wait(100)
+        fpsBoost = true
 	end
 end)
