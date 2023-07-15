@@ -23,5 +23,5 @@ Locales["en"] = {
 	["stateOff"] = "~r~OFF",
 	["menuTitle"] = "Radio menu",
 	["menuSubtitle"] = "Menu of your pocket radio",
-	["openRadioMenuKeyDesc"] = "Open the radio menu"
+	["openRadioMenuKeyDesc"] = "Open the radio menu",
 }
