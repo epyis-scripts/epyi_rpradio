@@ -1,3 +1,8 @@
+---TextEntry
+---@param textEntry string
+---@param inputText string
+---@param maxLength integer
+---@return string
 function TextEntry(textEntry, inputText, maxLength)
     AddTextEntry('FMMC_KEY_TIP1', textEntry)
     DisplayOnscreenKeyboard(1, "FMMC_KEY_TIP1", "", inputText, "", "", "", maxLength)
@@ -14,10 +19,12 @@ function TextEntry(textEntry, inputText, maxLength)
     end
 end
 
-function onlyContainNumber(source)
-    if string.match(source, "^%d+$") then
-        return true
-    else
+---OnlyContainNumber
+---@param source string
+---@return boolean
+function OnlyContainNumber(source)
+    if not string.match(source, "^%d+$") then
         return false
     end
+    return true
 end

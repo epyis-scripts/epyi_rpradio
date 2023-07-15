@@ -155,7 +155,7 @@ function openRadioMenu()
                     if Selected then
                         local newFrequency = TextEntry(Locale.textEntryDescription, "", Config.Radio.maxFrequencySize)
                         if newFrequency ~= nil then
-                            if onlyContainNumber(newFrequency) then
+                            if OnlyContainNumber(newFrequency) then
                                 local firstCharacter = string.sub(newFrequency, 1, 1)
                                 if firstCharacter == "0" then
                                     ESX.ShowNotification(Locale.firstCharacterError)
