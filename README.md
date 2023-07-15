@@ -1,12 +1,3 @@
-# Radio script for FiveM: epyi_rpradio
-.
-
-
-
-
-# Some credits for
-
-
 ![App Screenshot](https://media.discordapp.net/attachments/987630296801345544/1127114568284512306/banner3.png?width=1440&height=273)
 
 <h1 align='center'>Epyi's Scripts → Roleplay Radio</a></h1>
