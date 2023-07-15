@@ -1,6 +1,6 @@
 -- # // RADIO AS ITEM \\ # --
 ESX.RegisterUsableItem("radio", function(source)
-	TriggerClientEvent("epyi_rpradio:openMenu", source)
+	TriggerClientEvent("epyi_rpradio:OpenMenu", source)
 end)
 
 -- # // HASITEM CALLBACK \\ # --
