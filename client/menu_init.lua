@@ -1,6 +1,7 @@
 -- Variables initialization
 -- init some local variables
 isMenuOpened = false
+menuCooldown = false
 activeFrequency = 0
 isRadioActive = false
 isTalkingOnRadio = false
@@ -55,6 +56,15 @@ end
 ---openMenu → Function to open the radio main menu
 ---@return void
 function openMenu()
+	-- Cooldown for realistic animation & avoid spamming error
+	if menuCooldown then
+		return
+	end
+	menuCooldown = true
+	Citizen.SetTimeout(800, function()
+		menuCooldown = false
+	end)
+
 	if isMenuOpened then
 		isMenuOpened = false
 		return
