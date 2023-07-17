@@ -1,4 +1,4 @@
----TextEntry
+---textEntry
 ---@param textEntry string
 ---@param inputText string
 ---@param maxLength integer
@@ -19,7 +19,7 @@ function textEntry(textEntry, inputText, maxLength)
 	end
 end
 
----OnlyContainNumber
+---onlyContainNumber
 ---@param source string
 ---@return boolean
 function onlyContainNumber(source)
@@ -36,7 +36,7 @@ AddEventHandler("epyi_rpradio:OpenMenu", function()
 	openMenu()
 end)
 
----CloseRadioMenuAnimation → Play animation when closing radio menu
+---closeRadioMenuAnimation → Play animation when closing radio menu
 ---@return void
 function closeRadioMenuAnimation()
 	DetachEntity(propHandle, true, false)
@@ -54,7 +54,7 @@ function closeRadioMenuAnimation()
 	StopAnimTask(player, dictionary, animation, 1.0)
 end
 
----OpenRadioMenuAnimation → Play animation when openning the radio menu
+---openRadioMenuAnimation → Play animation when openning the radio menu
 ---@return void
 function openRadioMenuAnimation()
 	local player = PlayerPedId()
@@ -77,7 +77,7 @@ function openRadioMenuAnimation()
 	TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
 end
 
----DisconnectRadioIfDead
+---disconnectRadioIfDead
 ---@param player ped
 ---@return void
 function disconnectRadioIfDead(player)
@@ -92,10 +92,10 @@ function disconnectRadioIfDead(player)
 	exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
 	activeFrequency = 0
 	isRadioActive = false
-	CloseRadioMenuAnimation()
+	closeRadioMenuAnimation()
 end
 
----DisconnectIfNoItem
+---disconnectIfNoItem
 ---@return void
 function disconnectIfNoItem()
 	if not Config.Radio.useRadioAsItem then
@@ -110,11 +110,11 @@ function disconnectIfNoItem()
 		isMenuOpened = false
 		activeFrequency = 0
 		isRadioActive = false
-		CloseRadioMenuAnimation()
+		closeRadioMenuAnimation()
 	end, Config.Radio.radioItemName, 1)
 end
 
----PlayAnimWhenTalking
+---playAnimWhenTalking
 ---@param player ped
 ---@return void
 function playAnimWhenTalking(player)
