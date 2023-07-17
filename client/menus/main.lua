@@ -45,11 +45,11 @@ function main_showContentThisFrame()
 		not isRadioActive,
 		function(_, _, Selected)
 			if Selected then
-				local newFrequency = TextEntry(_U("text_entry_desc"), "", Config.Radio.maxFrequencySize)
+				local newFrequency = textEntry(_U("text_entry_desc"), "", Config.Radio.maxFrequencySize)
 				if newFrequency == nil then
 					return
 				end
-				if not OnlyContainNumber(newFrequency) then
+				if not onlyContainNumber(newFrequency) then
 					ESX.ShowNotification(_U("only_numbers"))
 					return
 				end

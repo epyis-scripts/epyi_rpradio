@@ -3,7 +3,7 @@
 ---@param inputText string
 ---@param maxLength integer
 ---@return string
-function TextEntry(textEntry, inputText, maxLength)
+function textEntry(textEntry, inputText, maxLength)
 	AddTextEntry("FMMC_KEY_TIP1", textEntry)
 	DisplayOnscreenKeyboard(1, "FMMC_KEY_TIP1", "", inputText, "", "", "", maxLength)
 	while UpdateOnscreenKeyboard() ~= 1 and UpdateOnscreenKeyboard() ~= 2 do
@@ -22,7 +22,7 @@ end
 ---OnlyContainNumber
 ---@param source string
 ---@return boolean
-function OnlyContainNumber(source)
+function onlyContainNumber(source)
 	if not string.match(source, "^%d+$") then
 		return false
 	end
@@ -38,7 +38,7 @@ end)
 
 ---CloseRadioMenuAnimation → Play animation when closing radio menu
 ---@return void
-function CloseRadioMenuAnimation()
+function closeRadioMenuAnimation()
 	DetachEntity(propHandle, true, false)
 	DeleteEntity(propHandle)
 	local player = PlayerPedId()
@@ -56,7 +56,7 @@ end
 
 ---OpenRadioMenuAnimation → Play animation when openning the radio menu
 ---@return void
-function OpenRadioMenuAnimation()
+function openRadioMenuAnimation()
 	local player = PlayerPedId()
 	local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
 	local animationType = 1 + (isMenuOpened and 0 or 1)
@@ -80,7 +80,7 @@ end
 ---DisconnectRadioIfDead
 ---@param player ped
 ---@return void
-function DisconnectRadioIfDead(player)
+function disconnectRadioIfDead(player)
 	if not Config.Radio.disconnectRadioOnDeath then
 		return
 	end
@@ -97,7 +97,7 @@ end
 
 ---DisconnectIfNoItem
 ---@return void
-function DisconnectIfNoItem()
+function disconnectIfNoItem()
 	if not Config.Radio.useRadioAsItem then
 		return
 	end
@@ -117,7 +117,7 @@ end
 ---PlayAnimWhenTalking
 ---@param player ped
 ---@return void
-function PlayAnimWhenTalking(player)
+function playAnimWhenTalking(player)
 	local broadcastType = 4 + (isMenuOpened and -1 or 0)
 	local broadcastDictionary = animDictionary[broadcastType]
 	local broadcastAnimation = animAnimation[broadcastType]

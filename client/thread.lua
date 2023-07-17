@@ -18,9 +18,9 @@ _threads.radio_active.enable = function()
 			AddEventHandler("pma-voice:radioActive", function(value)
 				isTalkingOnRadio = value
 			end)
-			PlayAnimWhenTalking(player)
-			DisconnectIfNoItem()
-			DisconnectRadioIfDead(player)
+			playAnimWhenTalking(player)
+			disconnectIfNoItem()
+			disconnectRadioIfDead(player)
 			Citizen.Wait(100)
 		end
 	end)

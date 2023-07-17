@@ -61,7 +61,7 @@ function openMenu()
 	end
 	isMenuOpened = true
 	RageUI.Visible(RMenu:Get("epyi_rpradio", "main"), true)
-	OpenRadioMenuAnimation()
+	openRadioMenuAnimation()
 	_threads.radio_active.enable()
 	while isMenuOpened do
 		exports["pma-voice"]:setVoiceProperty("micClicks", Config.Radio.Sounds.radioClicks)
@@ -83,5 +83,5 @@ function openMenu()
 	end
 	RageUI.CloseAll()
 	stopThreadLegacy()
-	CloseRadioMenuAnimation()
+	closeRadioMenuAnimation()
 end
