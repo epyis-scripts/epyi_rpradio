@@ -14,12 +14,15 @@ activeFrequencyString = nil
 -- Menu texture initialization
 -- create the menu texture with the config parameters
 if Config.MenuStyle.BannerStyle.ImageUrl ~= nil then
+	local runtimeTXD = CreateRuntimeTxd("Custom_Menu_Head")
 	local Object = CreateDui(
 		Config.MenuStyle.BannerStyle.ImageUrl,
 		Config.MenuStyle.BannerStyle.ImageSize.Width,
 		Config.MenuStyle.BannerStyle.ImageSize.Height
 	)
 	_G.Object = Object
+	local objectTexture = GetDuiHandle(Object)
+	local Texture = CreateRuntimeTextureFromDuiHandle(runtimeTXD, "Custom_Menu_Head", objectTexture)
 	menuTexture = "Custom_Menu_Head"
 end
 
@@ -41,12 +44,14 @@ RMenu:Get("epyi_rpradio", "main").Closed = function()
 	isMenuOpened = false
 	CloseRadioMenuAnimation()
 end
-RMenu:Get("epyi_rpradio", "main"):SetRectangleBanner(
-	Config.MenuStyle.BannerStyle.Color.r,
-	Config.MenuStyle.BannerStyle.Color.g,
-	Config.MenuStyle.BannerStyle.Color.b,
-	Config.MenuStyle.BannerStyle.Color.a
-)
+if Config.MenuStyle.BannerStyle.ImageUrl == nil then
+	RMenu:Get("epyi_rpradio", "main"):SetRectangleBanner(
+		Config.MenuStyle.BannerStyle.Color.r,
+		Config.MenuStyle.BannerStyle.Color.g,
+		Config.MenuStyle.BannerStyle.Color.b,
+		Config.MenuStyle.BannerStyle.Color.a
+	)
+end
 
 ---openMenu → Function to open the radio main menu
 ---@return void
@@ -66,9 +71,15 @@ function openMenu()
 			else
 				activeFrequencyString = _("frequency_color") .. activeFrequency .. _("frequency_symbol")
 			end
-			RageUI.IsVisible(RMenu:Get("epyi_rpradio", "main"), Config.MenuStyle.BannerStyle.UseHeader, Config.MenuStyle.BannerStyle.UseGlareEffect, Config.MenuStyle.BannerStyle.UseInstructionalButtons, function()
-				main_showContentThisFrame()
-			end)
+			RageUI.IsVisible(
+				RMenu:Get("epyi_rpradio", "main"),
+				Config.MenuStyle.BannerStyle.UseHeader,
+				Config.MenuStyle.BannerStyle.UseGlareEffect,
+				Config.MenuStyle.BannerStyle.UseInstructionalButtons,
+				function()
+					main_showContentThisFrame()
+				end
+			)
 			Citizen.Wait(1)
 		end
 	end
