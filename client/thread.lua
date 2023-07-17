@@ -26,5 +26,4 @@ _threads.radio_active.enable = function()
 end
 _threads.radio_active.disable = function()
 	_threads.radio_active.isActivated = false
-	SetEntityInvincible(PlayerPedId(), false)
 end
