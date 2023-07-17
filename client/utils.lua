@@ -140,3 +140,12 @@ function PlayAnimWhenTalking(player)
 		end
 	end
 end
+
+---stopThreadLegacy
+---@return void
+function stopThreadLegacy()
+	if isRadioActive then
+		return
+	end
+	_threads.radio_active.disable()
+end

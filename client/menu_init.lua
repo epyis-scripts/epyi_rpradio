@@ -42,7 +42,6 @@ RMenu.Add(
 )
 RMenu:Get("epyi_rpradio", "main").Closed = function()
 	isMenuOpened = false
-	CloseRadioMenuAnimation()
 end
 if Config.MenuStyle.BannerStyle.ImageUrl == nil then
 	RMenu:Get("epyi_rpradio", "main"):SetRectangleBanner(
@@ -57,30 +56,32 @@ end
 ---@return void
 function openMenu()
 	if isMenuOpened then
-		RageUI.CloseAll()
 		isMenuOpened = false
-		CloseRadioMenuAnimation()
-	else
-		isMenuOpened = true
-		OpenRadioMenuAnimation()
-		RageUI.Visible(RMenu:Get("epyi_rpradio", "main"), true)
-		while isMenuOpened do
-			exports["pma-voice"]:setVoiceProperty("micClicks", Config.Radio.Sounds.radioClicks)
-			if activeFrequency == 0 then
-				activeFrequencyString = _("frequency_color") .. _U("no_frequency_selected_menu")
-			else
-				activeFrequencyString = _("frequency_color") .. activeFrequency .. _("frequency_symbol")
-			end
-			RageUI.IsVisible(
-				RMenu:Get("epyi_rpradio", "main"),
-				Config.MenuStyle.BannerStyle.UseHeader,
-				Config.MenuStyle.BannerStyle.UseGlareEffect,
-				Config.MenuStyle.BannerStyle.UseInstructionalButtons,
-				function()
-					main_showContentThisFrame()
-				end
-			)
-			Citizen.Wait(1)
-		end
+		return
 	end
+	isMenuOpened = true
+	RageUI.Visible(RMenu:Get("epyi_rpradio", "main"), true)
+	OpenRadioMenuAnimation()
+	_threads.radio_active.enable()
+	while isMenuOpened do
+		exports["pma-voice"]:setVoiceProperty("micClicks", Config.Radio.Sounds.radioClicks)
+		if activeFrequency == 0 then
+			activeFrequencyString = _("frequency_color") .. _U("no_frequency_selected_menu")
+		else
+			activeFrequencyString = _("frequency_color") .. activeFrequency .. _("frequency_symbol")
+		end
+		RageUI.IsVisible(
+			RMenu:Get("epyi_rpradio", "main"),
+			Config.MenuStyle.BannerStyle.UseHeader,
+			Config.MenuStyle.BannerStyle.UseGlareEffect,
+			Config.MenuStyle.BannerStyle.UseInstructionalButtons,
+			function()
+				main_showContentThisFrame()
+			end
+		)
+		Citizen.Wait(0)
+	end
+	RageUI.CloseAll()
+	stopThreadLegacy()
+	CloseRadioMenuAnimation()
 end

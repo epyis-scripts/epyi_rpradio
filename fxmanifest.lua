@@ -36,7 +36,7 @@ client_scripts({
 
 	"client/menu_init.lua",
 	"client/keys.lua",
-	"client/main.lua",
+	"client/thread.lua",
 	"client/utils.lua",
 	"client/menus/main.lua",
 })
