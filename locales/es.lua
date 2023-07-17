@@ -24,4 +24,4 @@ Locales["es"] = {
 	["menu_title"] = "Menú de la radio",
 	["menu_subtitle"] = "Menú de tu radio portátil",
 	["key_desc"] = "Abrir el menú de la radio",
-	}
+}
