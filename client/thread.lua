@@ -13,7 +13,6 @@ _threads.radio_active.enable = function()
 		end
 		_threads.radio_active.isActivated = true
 		while _threads.radio_active.isActivated do
-			print("thread actif")
 			local player = PlayerPedId()
 			AddEventHandler("pma-voice:radioActive", function(value)
 				isTalkingOnRadio = value
