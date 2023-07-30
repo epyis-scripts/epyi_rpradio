@@ -1,5 +1,5 @@
 local Percentage = {
-    Background = { Dictionary = "commonmenu", Texture = "for_creator", Y = 4, Width = 431, Height = 76 },
+    Background = { Dictionary = "commonmenu", Texture = "gradient_bgd", Y = 4, Width = 431, Height = 76 },
     Bar = { X = 9, Y = 50, Width = 413, Height = 10 },
     Text = {
         Left = { X = 25, Y = 15, Scale = 0.35 },
@@ -40,7 +40,7 @@ function RageUI.PercentagePanel(Percent, HeaderText, MinText, MaxText, Callback,
 
             Progress = Progress * Percent
 
-            RenderRectangle(CurrentMenu.X, CurrentMenu.Y + Percentage.Background.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Percentage.Background.Width + CurrentMenu.WidthOffset, Percentage.Background.Height, 3, 3, 3, 70)
+            RenderSprite(Percentage.Background.Dictionary, Percentage.Background.Texture, CurrentMenu.X, CurrentMenu.Y + Percentage.Background.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Percentage.Background.Width + CurrentMenu.WidthOffset, Percentage.Background.Height)
             RenderRectangle(CurrentMenu.X + Percentage.Bar.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + Percentage.Bar.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Percentage.Bar.Width, Percentage.Bar.Height, 87, 87, 87, 255)
             RenderRectangle(CurrentMenu.X + Percentage.Bar.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + Percentage.Bar.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Progress, Percentage.Bar.Height, 245, 245, 245, 255)
 
@@ -52,7 +52,7 @@ function RageUI.PercentagePanel(Percent, HeaderText, MinText, MaxText, Callback,
                 if IsDisabledControlPressed(0, 24) then
                     Selected = true
 
-                    Progress = math.round(GetControlNormal(0, 239) * 1920) - CurrentMenu.SafeZoneSize.X - (CurrentMenu.X + Percentage.Bar.X + (CurrentMenu.WidthOffset / 2))
+                    Progress = math.round(GetControlNormal(2, 239) * 1920) - CurrentMenu.SafeZoneSize.X - (CurrentMenu.X + Percentage.Bar.X + (CurrentMenu.WidthOffset / 2))
 
                     if Progress < 0 then
                         Progress = 0

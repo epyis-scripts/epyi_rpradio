@@ -30,7 +30,6 @@ function RMenu.Add(Type, Name, Menu)
             Menu = Menu
         }
     end
-    
     table.insert(TotalMenus, Menu)
 end
 

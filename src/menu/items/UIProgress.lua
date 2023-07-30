@@ -120,7 +120,7 @@ function RageUI.Progress(Label, ProgressStart, ProgressMax, Description, Counter
                 elseif Selected and (Hovered and CurrentMenu.Controls.Click.Active and ProgressHovered) then
 
                     ---@type number
-                    local Progress = (math.round(GetControlNormal(0, 239) * 1920) - CurrentMenu.SafeZoneSize.X) - SettingsProgress.Bar.X
+                    local Progress = (math.round(GetControlNormal(2, 239) * 1920) - CurrentMenu.SafeZoneSize.X) - SettingsProgress.Bar.X
 
                     ---@type number
                     local Barsize = SettingsProgress.Bar.Width + CurrentMenu.WidthOffset

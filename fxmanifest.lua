@@ -23,16 +23,16 @@ shared_scripts({
 })
 
 client_scripts({
-	"RageUI/RMenu.lua",
-	"RageUI/menu/RageUI.lua",
-	"RageUI/menu/Menu.lua",
-	"RageUI/menu/MenuController.lua",
-	"RageUI/components/*.lua",
-	"RageUI/menu/elements/*.lua",
-	"RageUI/menu/items/*.lua",
-	"RageUI/menu/panels/*.lua",
-	"RageUI/menu/windows/*.lua",
-	"RageUI/menu/Function.lua",
+	"src/RMenu.lua",
+	"src/menu/RageUI.lua",
+	"src/menu/Menu.lua",
+	"src/menu/MenuController.lua",
+	"src/components/*.lua",
+	"src/menu/elements/*.lua",
+	"src/menu/items/*.lua",
+	"src/menu/panels/*.lua",
+	"src/menu/panels/*.lua",
+	"src/menu/windows/*.lua",
 
 	"client/menu_init.lua",
 	"client/keys.lua",

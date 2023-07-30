@@ -44,7 +44,7 @@ function RageUI.GridPanelHorizontal(X, LeftText, RightText, Callback, Index)
             CircleX = CircleX + ((GridPanelHorizontal.Grid.Width - 40) * X) - (GridPanelHorizontal.Circle.Width / 2)
             CircleY = CircleY + ((GridPanelHorizontal.Grid.Height - 40) * Y) - (GridPanelHorizontal.Circle.Height / 2)
 
-            RenderRectangle(CurrentMenu.X, CurrentMenu.Y + GridPanelHorizontal.Background.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, GridPanelHorizontal.Background.Width + CurrentMenu.WidthOffset, GridPanelHorizontal.Background.Height, 3, 3, 3, 70)
+            RenderSprite(GridPanelHorizontal.Background.Dictionary, GridPanelHorizontal.Background.Texture, CurrentMenu.X, CurrentMenu.Y + GridPanelHorizontal.Background.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, GridPanelHorizontal.Background.Width + CurrentMenu.WidthOffset, GridPanelHorizontal.Background.Height)
             RenderSprite(GridPanelHorizontal.Grid.Dictionary, GridPanelHorizontal.Grid.Texture, CurrentMenu.X + GridPanelHorizontal.Grid.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + GridPanelHorizontal.Grid.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, GridPanelHorizontal.Grid.Width, GridPanelHorizontal.Grid.Height)
             RenderSprite(GridPanelHorizontal.Circle.Dictionary, GridPanelHorizontal.Circle.Texture, CircleX, CircleY, GridPanelHorizontal.Circle.Width, GridPanelHorizontal.Circle.Height)
 
@@ -55,7 +55,7 @@ function RageUI.GridPanelHorizontal(X, LeftText, RightText, Callback, Index)
                 if IsDisabledControlPressed(0, 24) then
                     Selected = true
 
-                    CircleX = math.round(GetControlNormal(0, 239) * 1920) - CurrentMenu.SafeZoneSize.X - (GridPanelHorizontal.Circle.Width / 2)
+                    CircleX = math.round(GetControlNormal(2, 239) * 1920) - CurrentMenu.SafeZoneSize.X - (GridPanelHorizontal.Circle.Width / 2)
 
                     if CircleX > (CurrentMenu.X + GridPanelHorizontal.Grid.X + (CurrentMenu.WidthOffset / 2) + 20 + GridPanelHorizontal.Grid.Width - 40) then
                         CircleX = CurrentMenu.X + GridPanelHorizontal.Grid.X + (CurrentMenu.WidthOffset / 2) + 20 + GridPanelHorizontal.Grid.Width - 40

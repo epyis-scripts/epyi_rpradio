@@ -17,7 +17,7 @@
 ---@param A number
 ---@return table
 ---@public
-function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName, R, G, B, A, mouse)
+function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName, R, G, B, A)
 
     ---@type table
     local Menu = {}
@@ -30,7 +30,7 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
     Menu.X = X or 0
     Menu.Y = Y or 0
     Menu.Parent = nil
-    Menu.WidthOffset = RageUI.UI.Style[RageUI.UI.Current].Width
+    Menu.WidthOffset = 0
     Menu.Open = false
     Menu.Controls = RageUI.Settings.Controls
     Menu.Index = 1
@@ -39,7 +39,7 @@ function RageUI.CreateMenu(Title, Subtitle, X, Y, TextureDictionary, TextureName
     Menu.Pagination = { Minimum = 1, Maximum = 10, Total = 10 }
     Menu.Safezone = true
     Menu.SafeZoneSize = nil
-    Menu.EnableMouse = mouse
+    Menu.EnableMouse = false
     Menu.Options = 0
     Menu.Closable = true
     Menu.InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
@@ -87,7 +87,7 @@ end
 ---@param A number
 ---@return table
 ---@public
-function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName, R, G, B, A, mouse)
+function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictionary, TextureName, R, G, B, A)
     if ParentMenu ~= nil then
         if ParentMenu() then
 
@@ -109,7 +109,7 @@ function RageUI.CreateSubMenu(ParentMenu, Title, Subtitle, X, Y, TextureDictiona
             Menu.Pagination = { Minimum = 1, Maximum = 10, Total = 10 }
             Menu.Safezone = ParentMenu.Safezone
             Menu.SafeZoneSize = nil
-            Menu.EnableMouse = mouse
+            Menu.EnableMouse = false
             Menu.Options = 0
             Menu.Closable = true
             Menu.InstructionalScaleform = RequestScaleformMovie("INSTRUCTIONAL_BUTTONS")
@@ -163,7 +163,7 @@ function RageUI.Menus:SetStyleSize(Value)
     if Value >= 0 and Value <= 100 then
         witdh = Value
     else
-        witdh = 100
+        witdh = 0
     end
     self.WidthOffset = witdh
 end
@@ -383,8 +383,3 @@ function RageUI.Menus:UpdateInstructionalButtons(Visible)
     ScaleformMovieMethodAddParamInt(-1)
     EndScaleformMovieMethod()
 end
-
-RegisterNetEvent("RageUI:GoBack")
-AddEventHandler("RageUI:GoBack", function()
-    RageUI.GoBack()
-end)

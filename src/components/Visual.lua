@@ -95,7 +95,7 @@ function RageUI.Text(array)
     if (array.time_display ~= nil) then
         DrawSubtitleTimed(tonumber(array.time_display), 1)
     else
-        DrawSubtitleTimed(10, 1)
+        DrawSubtitleTimed(6000, 1)
     end
     if (array.sound ~= nil) then
         if (array.sound.audio_name ~= nil) then
