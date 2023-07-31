@@ -15,7 +15,7 @@ activeFrequencyString = nil
 -- Menu texture initialization
 -- create the menu texture with the config parameters
 if Config.MenuStyle.BannerStyle.ImageUrl ~= nil then
-	local runtimeTXD = CreateRuntimeTxd("Custom_Menu_Head")
+	local runtimeTXD = CreateRuntimeTxd("radio_custom_header")
 	local Object = CreateDui(
 		Config.MenuStyle.BannerStyle.ImageUrl,
 		Config.MenuStyle.BannerStyle.ImageSize.Width,
@@ -23,8 +23,8 @@ if Config.MenuStyle.BannerStyle.ImageUrl ~= nil then
 	)
 	_G.Object = Object
 	local objectTexture = GetDuiHandle(Object)
-	local Texture = CreateRuntimeTextureFromDuiHandle(runtimeTXD, "Custom_Menu_Head", objectTexture)
-	menuTexture = "Custom_Menu_Head"
+	local Texture = CreateRuntimeTextureFromDuiHandle(runtimeTXD, "radio_custom_header", objectTexture)
+	menuTexture = "radio_custom_header"
 end
 
 -- RageUI menu initialization

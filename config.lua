@@ -10,6 +10,7 @@ Config.MenuStyle = {
 		UseInstructionalButtons = true, -- [boolean] → Use the instructionals buttons or not
 		ImageUrl = nil, -- [nil/string] → Set a custom image url if you want (if set, it will disable the Color configuration)
 		ImageSize = { Width = 512, Height = 128 }, -- [table] → Set the image (ImageUrl) size un pixels
+		widthOffset = 0, -- [integer] → Offset of the menu (default: 0, max: 100)
 	},
 }
 

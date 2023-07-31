@@ -34,6 +34,7 @@ client_scripts({
 	"src/menu/panels/*.lua",
 	"src/menu/windows/*.lua",
 
+	"client/var_init.lua",
 	"client/menu_init.lua",
 	"client/keys.lua",
 	"client/thread.lua",
