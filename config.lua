@@ -10,7 +10,7 @@ Config.menuStyle = {
 		useInstructionalButtons = true, -- [boolean] → Use the instructionals buttons or not
 		imageUrl = nil, -- [nil/string] → Set a custom image url if you want (if set, it will disable the color configuration)
 		imageSize = { width = 512, height = 128 }, -- [table] → Set the image (imageUrl) size un pixels
-		widthOffset = 100, -- [integer] → Offset of the menu (default rageui: 0, max: 100)
+		widthOffset = 0, -- [integer] → Offset of the menu (default rageui: 0, max: 100)
 	},
 }
 
