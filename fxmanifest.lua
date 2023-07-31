@@ -4,7 +4,7 @@ game("gta5")
 name("epyi_rpradio")
 description("Une radio qui utilise l'API Radio de pma-voice")
 author("Epyi (https://discord.gg/VyRPheG6Es)")
-version("1.0.0")
+version("1.7.0")
 
 ui_page("ui/index.html")
 
