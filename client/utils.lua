@@ -59,7 +59,7 @@ end
 function openRadioMenuAnimation()
 	local player = PlayerPedId()
 	local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
-	local animationType = 1 + (isMenuOpened and 0 or 1)
+	local animationType = 1 + (_var.menus.radio.rageObject and 0 or 1)
 	local dictionary = animDictionary[dictionaryType]
 	local animation = animAnimation[animationType]
 	RequestModel(GetHashKey("prop_cs_hand_radio"))
@@ -118,7 +118,7 @@ end
 ---@param player ped
 ---@return void
 function playAnimWhenTalking(player)
-	local broadcastType = 4 + (isMenuOpened and -1 or 0)
+	local broadcastType = 4 + (_var.menus.radio.rageObject and -1 or 0)
 	local broadcastDictionary = animDictionary[broadcastType]
 	local broadcastAnimation = animAnimation[broadcastType]
 	if isTalkingOnRadio and not isPlayingTalkingAnim then
@@ -131,9 +131,9 @@ function playAnimWhenTalking(player)
 	elseif not isTalkingOnRadio and isPlayingTalkingAnim then
 		isPlayingTalkingAnim = false
 		StopAnimTask(player, broadcastDictionary, broadcastAnimation, -4.0)
-		if isMenuOpened then
+		if _var.menus.radio.rageObject then
 			local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
-			local animationType = 1 + (isMenuOpened and 0 or 1)
+			local animationType = 1 + (_var.menus.radio.rageObject and 0 or 1)
 			local dictionary = animDictionary[dictionaryType]
 			local animation = animAnimation[animationType]
 			TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)

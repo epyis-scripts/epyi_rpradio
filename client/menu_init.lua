@@ -27,36 +27,10 @@ if Config.MenuStyle.BannerStyle.ImageUrl ~= nil then
 	menuTexture = "radio_custom_header"
 end
 
--- RageUI menu initialization
--- init the rageui menu with the config parameters
-RMenu.Add(
-	"epyi_rpradio",
-	"main",
-	RageUI.CreateMenu(
-		_("menu_title"),
-		_U("menu_subtitle"),
-		Config.MenuStyle.Margins.left,
-		Config.MenuStyle.Margins.top,
-		menuTexture,
-		menuTexture
-	)
-)
-RMenu:Get("epyi_rpradio", "main").Closed = function()
-	isMenuOpened = false
-end
-if Config.MenuStyle.BannerStyle.ImageUrl == nil then
-	RMenu:Get("epyi_rpradio", "main"):SetRectangleBanner(
-		Config.MenuStyle.BannerStyle.Color.r,
-		Config.MenuStyle.BannerStyle.Color.g,
-		Config.MenuStyle.BannerStyle.Color.b,
-		Config.MenuStyle.BannerStyle.Color.a
-	)
-end
-
 ---openMenu → Function to open the radio main menu
 ---@return void
 function openMenu()
-	-- Cooldown for realistic animation & avoid spamming error
+	-- Cooldown for realistic animation
 	if menuCooldown then
 		return
 	end
@@ -65,15 +39,39 @@ function openMenu()
 		menuCooldown = false
 	end)
 
-	if isMenuOpened then
-		isMenuOpened = false
+	-- Close menu if already opened
+	if _var.menus.radio.rageObject then
+		RageUI.Visible(_var.menus.radio.rageObject, false)
 		return
 	end
-	isMenuOpened = true
-	RageUI.Visible(RMenu:Get("epyi_rpradio", "main"), true)
-	openRadioMenuAnimation()
+
+	-- RageUI menu initialization
+	-- init the rageui menu with the config parameters
+	_var.menus.radio.rageObject = RageUI.CreateMenu(
+		_("menu_title"),
+		_U("menu_subtitle"),
+		Config.MenuStyle.Margins.left,
+		Config.MenuStyle.Margins.top,
+		menuTexture,
+		menuTexture
+	)
+	if Config.MenuStyle.BannerStyle.ImageUrl == nil then
+		_var.menus.radio.rageObject:SetRectangleBanner(
+			Config.MenuStyle.BannerStyle.Color.r,
+			Config.MenuStyle.BannerStyle.Color.g,
+			Config.MenuStyle.BannerStyle.Color.b,
+			Config.MenuStyle.BannerStyle.Color.a
+		)
+	end
+	_var.menus.radio.rageObject:SetStyleSize(Config.MenuStyle.BannerStyle.widthOffset)
+	RageUI.Visible(_var.menus.radio.rageObject, not RageUI.Visible(_var.menus.radio.rageObject))
+
+	-- Functions to execute when opening the menu
 	_threads.radio_active.enable()
-	while isMenuOpened do
+	openRadioMenuAnimation()
+
+	-- RageUI menu loop
+	while _var.menus.radio.rageObject do
 		exports["pma-voice"]:setVoiceProperty("micClicks", Config.Radio.Sounds.radioClicks)
 		if activeFrequency == 0 then
 			activeFrequencyString = _("frequency_color") .. _U("no_frequency_selected_menu")
@@ -81,17 +79,24 @@ function openMenu()
 			activeFrequencyString = _("frequency_color") .. activeFrequency .. _("frequency_symbol")
 		end
 		RageUI.IsVisible(
-			RMenu:Get("epyi_rpradio", "main"),
+			_var.menus.radio.rageObject,
 			Config.MenuStyle.BannerStyle.UseHeader,
 			Config.MenuStyle.BannerStyle.UseGlareEffect,
 			Config.MenuStyle.BannerStyle.UseInstructionalButtons,
 			function()
 				main_showContentThisFrame()
+			end,
+			function()
+				-- panels
 			end
 		)
+		if not RageUI.Visible(_var.menus.radio.rageObject) then
+			_var.menus.radio.rageObject = RMenu:DeleteType("_var.menus.radio.rageObject", true)
+
+			-- Function to execute when closing the menu
+			stopThreadLegacy()
+			closeRadioMenuAnimation()
+		end
 		Citizen.Wait(0)
 	end
-	RageUI.CloseAll()
-	stopThreadLegacy()
-	closeRadioMenuAnimation()
 end
