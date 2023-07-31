@@ -4,8 +4,8 @@ if Config.menuStyle.bannerStyle.imageUrl ~= nil then
 	local runtimeTXD = CreateRuntimeTxd("radio_custom_header")
 	local Object = CreateDui(
 		Config.menuStyle.bannerStyle.imageUrl,
-		Config.menuStyle.bannerStyle.imageSize.Width,
-		Config.menuStyle.bannerStyle.imageSize.Height
+		Config.menuStyle.bannerStyle.imageSize.width,
+		Config.menuStyle.bannerStyle.imageSize.height
 	)
 	_G.Object = Object
 	local objectTexture = GetDuiHandle(Object)
