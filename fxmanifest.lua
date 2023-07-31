@@ -2,9 +2,9 @@ fx_version("cerulean")
 game("gta5")
 
 name("epyi_rpradio")
-description("Une radio qui utilise l'API Radio de pma-voice")
+description("RageUI Radio script for pma-voice API")
 author("Epyi (https://discord.gg/VyRPheG6Es)")
-version("1.0.0")
+version("1.7.0")
 
 ui_page("ui/index.html")
 
@@ -23,17 +23,18 @@ shared_scripts({
 })
 
 client_scripts({
-	"RageUI/RMenu.lua",
-	"RageUI/menu/RageUI.lua",
-	"RageUI/menu/Menu.lua",
-	"RageUI/menu/MenuController.lua",
-	"RageUI/components/*.lua",
-	"RageUI/menu/elements/*.lua",
-	"RageUI/menu/items/*.lua",
-	"RageUI/menu/panels/*.lua",
-	"RageUI/menu/windows/*.lua",
-	"RageUI/menu/Function.lua",
+	"src/RMenu.lua",
+	"src/menu/RageUI.lua",
+	"src/menu/Menu.lua",
+	"src/menu/MenuController.lua",
+	"src/components/*.lua",
+	"src/menu/elements/*.lua",
+	"src/menu/items/*.lua",
+	"src/menu/panels/*.lua",
+	"src/menu/panels/*.lua",
+	"src/menu/windows/*.lua",
 
+	"client/var_init.lua",
 	"client/menu_init.lua",
 	"client/keys.lua",
 	"client/thread.lua",

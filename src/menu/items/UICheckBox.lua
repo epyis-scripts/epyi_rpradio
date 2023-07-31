@@ -182,9 +182,13 @@ function RageUI.Checkbox(Label, Description, Checked, Style, Callback, onChecked
                         RageUI.PlaySound(Audio[Audio.Use].Select.audioName, Audio[Audio.Use].Select.audioRef)
                         Checked = not Checked
                         if (Checked) then
-                            onChecked();
+                            if (onChecked ~= nil) then
+                                onChecked();
+                            end
                         else
-                            onUnchecked()
+                            if (onUnchecked ~= nil) then
+                                onUnchecked()
+                            end
                         end
                     end
 
@@ -193,9 +197,13 @@ function RageUI.Checkbox(Label, Description, Checked, Style, Callback, onChecked
                         RageUI.PlaySound(Audio[Audio.Use].Error.audioName, Audio[Audio.Use].Error.audioRef)
                         Checked = false
                         if (Checked) then
-                            onChecked();
+                            if (onChecked ~= nil) then
+                                onChecked();
+                            end
                         else
-                            onUnchecked()
+                            if (onUnchecked ~= nil) then
+                                onUnchecked()
+                            end
                         end
                     end
 

@@ -1,7 +1,7 @@
 -- Key registering
-if Config.Radio.key ~= nil then
-	Keys.Register(Config.Radio.key, "-openRadioMenu", _U("key_desc"), function()
-		if not Config.Radio.useRadioAsItem then
+if Config.radio.key ~= nil then
+	Keys.Register(Config.radio.key, "-openRadioMenu", _U("key_desc"), function()
+		if not Config.radio.useRadioAsItem then
 			openMenu()
 			return
 		end
@@ -11,6 +11,6 @@ if Config.Radio.key ~= nil then
 				return
 			end
 			openMenu()
-		end, Config.Radio.radioItemName, 1)
+		end, Config.radio.radioItemName, 1)
 	end)
 end

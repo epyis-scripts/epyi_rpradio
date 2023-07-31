@@ -7,13 +7,12 @@ local SettingsButton = {
 
 ---@type table
 local SettingsSlider = {
-    Background = { X = 250, Y = 14.5, Width = 150, Height = 8 },
-    Slider = { X = 250, Y = 14.5, Width = 75, Height = 8 },
-    Divider = { X = 323.5, Y = 9, Width = 2.5, Height = 18 },
-    LeftArrow = { Dictionary = "mpleaderboard", Texture = "leaderboard_female_icon", X = 215, Y = 0, Width = 40, Height = 38 },
-    RightArrow = { Dictionary = "mpleaderboard", Texture = "leaderboard_male_icon", X = 395, Y = 0, Width = 40, Height = 38 },
+    Background = { X = 250, Y = 14.5, Width = 150, Height = 9 },
+    Slider = { X = 250, Y = 14.5, Width = 75, Height = 9 },
+    Divider = { X = 323.5, Y = 9, Width = 2.5, Height = 20 },
+    LeftArrow = { Dictionary = "mpleaderboard", Texture = "leaderboard_female_icon", X = 215, Y = 0, Width = 40, Height = 40 },
+    RightArrow = { Dictionary = "mpleaderboard", Texture = "leaderboard_male_icon", X = 395, Y = 0, Width = 40, Height = 40 },
 }
-
 
 local Items = {}
 for i = 1, 10 do
@@ -28,7 +27,7 @@ end
 ---@param ItemIndex number
 ---@param Description string
 ---@param Callback function
-function RageUI.UISliderHeritage(Label, ItemIndex, Description, Callback)
+function RageUI.UISliderHeritage(Label, ItemIndex, Description, Callback, Value)
 
     ---@type table
     local CurrentMenu = RageUI.CurrentMenu;
@@ -43,6 +42,7 @@ function RageUI.UISliderHeritage(Label, ItemIndex, Description, Callback)
             if CurrentMenu.Pagination.Minimum <= Option and CurrentMenu.Pagination.Maximum >= Option then
 
                 ---@type number
+                local value = Value or 0.1
                 local Selected = CurrentMenu.Index == Option
 
                 ---@type boolean
@@ -54,7 +54,7 @@ function RageUI.UISliderHeritage(Label, ItemIndex, Description, Callback)
                 local RightOffset = 0
 
                 ---@type boolean
-                if CurrentMenu.EnableMouse == true then
+                if CurrentMenu.EnableMouse == true and (CurrentMenu.CursorStyle == 0) or (CurrentMenu.CursorStyle == 1) then
                     Hovered = RageUI.ItemsMouseBounds(CurrentMenu, Selected, Option, SettingsButton);
                 end
 
@@ -63,6 +63,7 @@ function RageUI.UISliderHeritage(Label, ItemIndex, Description, Callback)
                     LeftArrowHovered = RageUI.IsMouseInBounds(CurrentMenu.X + SettingsSlider.LeftArrow.X + CurrentMenu.SafeZoneSize.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.LeftArrow.Y + CurrentMenu.SafeZoneSize.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.LeftArrow.Width, SettingsSlider.LeftArrow.Height)
                     RightArrowHovered = RageUI.IsMouseInBounds(CurrentMenu.X + SettingsSlider.RightArrow.X + CurrentMenu.SafeZoneSize.X + CurrentMenu.WidthOffset, CurrentMenu.Y + SettingsSlider.RightArrow.Y + CurrentMenu.SafeZoneSize.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, SettingsSlider.RightArrow.Width, SettingsSlider.RightArrow.Height)
                 end
+
                 RightOffset = RightOffset
 
                 if Selected then
@@ -87,14 +88,14 @@ function RageUI.UISliderHeritage(Label, ItemIndex, Description, Callback)
                 RageUI.ItemsDescription(CurrentMenu, Description, Selected);
 
                 if Selected and (CurrentMenu.Controls.SliderLeft.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) and not (CurrentMenu.Controls.SliderRight.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) then
-                    ItemIndex = ItemIndex - 0.1
+                    ItemIndex = ItemIndex - value
                     if ItemIndex < 0.1 then
                         ItemIndex = 0.0
                     else
                         RageUI.PlaySound(Audio[Audio.Use].Slider.audioName, Audio[Audio.Use].Slider.audioRef, true)
                     end
                 elseif Selected and (CurrentMenu.Controls.SliderRight.Active or (CurrentMenu.Controls.Click.Active and RightArrowHovered)) and not (CurrentMenu.Controls.SliderLeft.Active or (CurrentMenu.Controls.Click.Active and LeftArrowHovered)) then
-                    ItemIndex = ItemIndex + 0.1
+                    ItemIndex = ItemIndex + value
                     if ItemIndex > #Items then
                         ItemIndex = 10
                     else
@@ -106,10 +107,13 @@ function RageUI.UISliderHeritage(Label, ItemIndex, Description, Callback)
                     RageUI.PlaySound(Audio[Audio.Use].Select.audioName, Audio[Audio.Use].Select.audioRef, false)
                 end
 
-                Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), ItemIndex, ItemIndex)
+                Callback(Hovered, Selected, ((CurrentMenu.Controls.Select.Active or ((Hovered and CurrentMenu.Controls.Click.Active) and (not LeftArrowHovered and not RightArrowHovered))) and Selected), ItemIndex / 10, ItemIndex)
             end
 
             RageUI.Options = RageUI.Options + 1
         end
     end
 end
+
+
+

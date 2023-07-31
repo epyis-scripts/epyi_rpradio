@@ -9,7 +9,7 @@ RageUI.LastControl = false
 ---@return number
 ---@public
 function RageUI.IsMouseInBounds(X, Y, Width, Height)
-    local MX, MY = math.round(GetControlNormal(0, 239) * 1920) / 1920, math.round(GetControlNormal(0, 240) * 1080) / 1080
+    local MX, MY = math.round(GetControlNormal(2, 239) * 1920) / 1920, math.round(GetControlNormal(2, 240) * 1080) / 1080
     X, Y = X / 1920, Y / 1080
     Width, Height = Width / 1920, Height / 1080
     return (MX >= X and MX <= X + Width) and (MY > Y and MY < Y + Height)
@@ -64,6 +64,9 @@ function RageUI.GoUp(Options)
                 local Audio = RageUI.Settings.Audio
                 RageUI.PlaySound(Audio[Audio.Use].UpDown.audioName, Audio[Audio.Use].UpDown.audioRef)
                 RageUI.LastControl = true
+                if (RageUI.CurrentMenu.onIndexChange ~= nil) then
+                    RageUI.CurrentMenu.onIndexChange(RageUI.CurrentMenu.Index)
+                end
             else
                 local Audio = RageUI.Settings.Audio
                 RageUI.PlaySound(Audio[Audio.Use].Error.audioName, Audio[Audio.Use].Error.audioRef)
@@ -107,6 +110,9 @@ function RageUI.GoDown(Options)
                 local Audio = RageUI.Settings.Audio
                 RageUI.PlaySound(Audio[Audio.Use].UpDown.audioName, Audio[Audio.Use].UpDown.audioRef)
                 RageUI.LastControl = false
+                if (RageUI.CurrentMenu.onIndexChange ~= nil) then
+                    RageUI.CurrentMenu.onIndexChange(RageUI.CurrentMenu.Index)
+                end
             else
                 local Audio = RageUI.Settings.Audio
                 RageUI.PlaySound(Audio[Audio.Use].Error.audioName, Audio[Audio.Use].Error.audioRef)
@@ -413,7 +419,7 @@ end
 function RageUI.Navigation()
     if RageUI.CurrentMenu ~= nil then
         if RageUI.CurrentMenu() then
-            if RageUI.CurrentMenu.EnableMouse   then
+            if RageUI.CurrentMenu.EnableMouse then
                 SetMouseCursorActiveThisFrame()
             end
             if RageUI.Options > RageUI.CurrentMenu.Pagination.Total then
@@ -438,7 +444,7 @@ function RageUI.Navigation()
                 UpHovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.CurrentMenu.SafeZoneSize.X, RageUI.CurrentMenu.Y + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height)
                 DownHovered = RageUI.IsMouseInBounds(RageUI.CurrentMenu.X + RageUI.CurrentMenu.SafeZoneSize.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Navigation.Rectangle.Height + RageUI.CurrentMenu.SafeZoneSize.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Navigation.Rectangle.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Navigation.Rectangle.Height)
 
-                if RageUI.CurrentMenu.EnableMouse   then
+                if RageUI.CurrentMenu.EnableMouse then
 
 
                     if RageUI.CurrentMenu.Controls.Click.Active then

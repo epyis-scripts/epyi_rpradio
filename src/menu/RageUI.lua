@@ -4,8 +4,6 @@
 --- DateTime: 21/04/2019 21:20
 ---
 
-print("^3 RageUI - https://github.com/iTexZoz/RageUI - OpenSource Advanced UI Api ^0")
-
 ---round
 ---@param num number
 ---@param numDecimalPlaces number
@@ -56,7 +54,7 @@ RageUI.UI = {
     Current = "RageUI",
     Style = {
         RageUI = {
-            Width = 100
+            Width = 0
         },
         NativeUI = {
             Width = 0
@@ -342,7 +340,9 @@ function RageUI.Visible(Menu, Value)
             if type(Value) == "boolean" then
                 if Value then
                     if RageUI.CurrentMenu ~= nil then
-                        RageUI.CurrentMenu.Closed()
+			if RageUI.CurrentMenu.Closed ~= nil then
+                            RageUI.CurrentMenu.Closed()
+                        end
                         RageUI.CurrentMenu.Open = not Value
                     end
                     Menu:UpdateInstructionalButtons(Value);
@@ -362,11 +362,10 @@ function RageUI.Visible(Menu, Value)
             end
         end
     end
-end 
+end
 
 function RageUI.CloseAll()
     menuOpen = false
-
     if RageUI.CurrentMenu ~= nil then
         local parent = RageUI.CurrentMenu.Parent
         while parent ~= nil do
@@ -407,7 +406,7 @@ function RageUI.Banner(Enabled, Glare)
                         RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y, RageUI.Settings.Items.Title.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Title.Background.Height, RageUI.CurrentMenu.Rectangle.R, RageUI.CurrentMenu.Rectangle.G, RageUI.CurrentMenu.Rectangle.B, RageUI.CurrentMenu.Rectangle.A)
                     end
 
-                    if (RageUI.CurrentMenu.WidthOffset == 100) then
+                    --if (RageUI.CurrentMenu.WidthOffset == 100) then
                         if Glare then
 
                             local ScaleformMovie = RequestScaleformMovie("MP_MENU_GLARE")
@@ -431,7 +430,7 @@ function RageUI.Banner(Enabled, Glare)
                             DrawScaleformMovie(ScaleformMovie, GlareX, GlareY, Glarewidth / 430, Glareheight / 100, 255, 255, 255, 255, 0)
 
                         end
-                    end
+                    --end
 
                     RenderText(RageUI.CurrentMenu.Title, RageUI.CurrentMenu.X + RageUI.Settings.Items.Title.Text.X + (RageUI.CurrentMenu.WidthOffset / 2), RageUI.CurrentMenu.Y + RageUI.Settings.Items.Title.Text.Y, 1, RageUI.Settings.Items.Title.Text.Scale, 255, 255, 255, 255, 1)
                     RageUI.ItemOffset = RageUI.ItemOffset + RageUI.Settings.Items.Title.Background.Height
@@ -485,7 +484,7 @@ function RageUI.Background()
         if RageUI.CurrentMenu() then
             RageUI.ItemsSafeZone(RageUI.CurrentMenu)
             SetScriptGfxDrawOrder(0)
-            RenderSprite(RageUI.Settings.Items.Background.Dictionary, RageUI.Settings.Items.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Background.Y + RageUI.CurrentMenu.SubtitleHeight, RageUI.Settings.Items.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.ItemOffset, 0, 33, 32, 49, 255)
+            RenderSprite(RageUI.Settings.Items.Background.Dictionary, RageUI.Settings.Items.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Background.Y + RageUI.CurrentMenu.SubtitleHeight, RageUI.Settings.Items.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.ItemOffset, 0, 0, 0, 0, 255)
             SetScriptGfxDrawOrder(1)
         end
     end
@@ -498,8 +497,8 @@ function RageUI.Description()
     if RageUI.CurrentMenu ~= nil and RageUI.CurrentMenu.Description ~= nil then
         if RageUI.CurrentMenu() then
             RageUI.ItemsSafeZone(RageUI.CurrentMenu)
-            RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Bar.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Description.Bar.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Description.Bar.Height, 255, 255, 255, 255)
-            RenderSprite(RageUI.Settings.Items.Description.Background.Dictionary, RageUI.Settings.Items.Description.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.DescriptionHeight, 0, 0, 0, 0)
+            RenderRectangle(RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Bar.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Description.Bar.Width + RageUI.CurrentMenu.WidthOffset, RageUI.Settings.Items.Description.Bar.Height, 0, 0, 0, 255)
+            RenderSprite(RageUI.Settings.Items.Description.Background.Dictionary, RageUI.Settings.Items.Description.Background.Texture, RageUI.CurrentMenu.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Background.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset, RageUI.CurrentMenu.DescriptionHeight, 0, 0, 0, 255)
             RenderText(RageUI.CurrentMenu.Description, RageUI.CurrentMenu.X + RageUI.Settings.Items.Description.Text.X, RageUI.CurrentMenu.Y + RageUI.Settings.Items.Description.Text.Y + RageUI.CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Items.Description.Text.Scale, 255, 255, 255, 255, nil, false, false, RageUI.Settings.Items.Description.Background.Width + RageUI.CurrentMenu.WidthOffset - 8.0)
             RageUI.ItemOffset = RageUI.ItemOffset + RageUI.CurrentMenu.DescriptionHeight + RageUI.Settings.Items.Description.Bar.Y
         end
@@ -530,8 +529,8 @@ function RageUI.Render(instructionalButton)
                     RageUI.CurrentMenu.Controls.Back.Pressed = false
                     local Audio = RageUI.Settings.Audio
                     RageUI.PlaySound(Audio[Audio.Use].Back.audioName, Audio[Audio.Use].Back.audioRef)
+                    collectgarbage()
                     if RageUI.CurrentMenu.Closed ~= nil then
-                        collectgarbage()
                         RageUI.CurrentMenu.Closed()
                     end
                     if RageUI.CurrentMenu.Parent ~= nil then
@@ -539,12 +538,10 @@ function RageUI.Render(instructionalButton)
                             RageUI.NextMenu = RageUI.CurrentMenu.Parent
                             RageUI.CurrentMenu:UpdateCursorStyle()
                         else
-                            --print('xxx') Debug print
                             RageUI.NextMenu = nil
                             RageUI.Visible(RageUI.CurrentMenu, false)
                         end
                     else
-                        --print('zz') Debug print
                         RageUI.NextMenu = nil
                         RageUI.Visible(RageUI.CurrentMenu, false)
                     end
@@ -699,32 +696,3 @@ function RageUI.GetStyleAudio()
     return RageUI.Settings.Audio.Use or "RageUI"
 end
 
----@class Keys
-Keys = {};
-
----Register
----@param Controls string
----@param ControlName string
----@param Description string
----@param Action function
----@return Keys
----@public
-function Keys.Register(Controls, ControlName, Description, Action)
-    local _Keys = {
-        CONTROLS = Controls
-    }
-    RegisterKeyMapping(string.format('%s', ControlName), Description, "keyboard", Controls)
-    RegisterCommand(string.format('%s', ControlName), function(source, args)
-        if (Action ~= nil) then
-            Action();
-        end
-    end, false)
-    return setmetatable(_Keys, Keys)
-end
-
----Exists
----@param Controls string
----@return boolean
-function Keys:Exists(Controls)
-    return self.CONTROLS == Controls and true or false
-end

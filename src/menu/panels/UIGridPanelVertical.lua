@@ -42,7 +42,7 @@ function RageUI.GridPanelVertical(Y, TopText, BottomText, Callback, Index)
             CircleX = CircleX + ((GridPanelVertical.Grid.Width - 40) * X) - (GridPanelVertical.Circle.Width / 2)
             CircleY = CircleY + ((GridPanelVertical.Grid.Height - 40) * Y) - (GridPanelVertical.Circle.Height / 2)
 
-            RenderRectangle(CurrentMenu.X, CurrentMenu.Y + GridPanelVertical.Background.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, GridPanelVertical.Background.Width + CurrentMenu.WidthOffset, GridPanelVertical.Background.Height, 3, 3, 3, 70)
+            RenderSprite(GridPanelVertical.Background.Dictionary, GridPanelVertical.Background.Texture, CurrentMenu.X, CurrentMenu.Y + GridPanelVertical.Background.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, GridPanelVertical.Background.Width + CurrentMenu.WidthOffset, GridPanelVertical.Background.Height)
             RenderSprite(GridPanelVertical.Grid.Dictionary, GridPanelVertical.Grid.Texture, CurrentMenu.X + GridPanelVertical.Grid.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + GridPanelVertical.Grid.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, GridPanelVertical.Grid.Width, GridPanelVertical.Grid.Height)
             RenderSprite(GridPanelVertical.Circle.Dictionary, GridPanelVertical.Circle.Texture, CircleX, CircleY, GridPanelVertical.Circle.Width, GridPanelVertical.Circle.Height)
 
@@ -53,7 +53,7 @@ function RageUI.GridPanelVertical(Y, TopText, BottomText, Callback, Index)
                 if IsDisabledControlPressed(0, 24) then
                     Selected = true
 
-                    CircleY = math.round(GetControlNormal(0, 240) * 1080) - CurrentMenu.SafeZoneSize.Y - (RageUI.Settings.Panels.Grid.Circle.Height / 2)
+                    CircleY = math.round(GetControlNormal(2, 240) * 1080) - CurrentMenu.SafeZoneSize.Y - (RageUI.Settings.Panels.Grid.Circle.Height / 2)
 
                     if CircleY > (CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20 + RageUI.Settings.Panels.Grid.Grid.Height - 40) then
                         CircleY = CurrentMenu.Y + RageUI.Settings.Panels.Grid.Grid.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset + 20 + RageUI.Settings.Panels.Grid.Grid.Height - 40
