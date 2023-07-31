@@ -3,11 +3,11 @@
 function main_showContentThisFrame()
 	RageUI.Separator("")
 	if _var.menus.radio.isRadioActive then
-		RageUI.Separator(TranslateCap("radio_state") .. Translate("state_on"))
+		RageUI.Separator(_U("radio_state") .. _("state_on"))
 	else
-		RageUI.Separator(TranslateCap("radio_state") .. Translate("state_off"))
+		RageUI.Separator(_U("radio_state") .. _("state_off"))
 	end
-	RageUI.Separator(TranslateCap("radio_frequency") .. _var.menus.radio.activeFrequencyString)
+	RageUI.Separator(_U("radio_frequency") .. _var.menus.radio.activeFrequencyString)
 	if Config.radio.canChangeVolume then
 		RageUI.Separator(_U("radio_volume") .. _var.menus.radio.radioVolume .. "%")
 	end
