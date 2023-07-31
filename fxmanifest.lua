@@ -2,7 +2,7 @@ fx_version("cerulean")
 game("gta5")
 
 name("epyi_rpradio")
-description("Une radio qui utilise l'API Radio de pma-voice")
+description("RageUI Radio script for pma-voice API")
 author("Epyi (https://discord.gg/VyRPheG6Es)")
 version("1.7.0")
 
