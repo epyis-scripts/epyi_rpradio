@@ -8,7 +8,7 @@ function main_showContentThisFrame()
 		RageUI.Separator(TranslateCap("radio_state") .. Translate("state_off"))
 	end
 	RageUI.Separator(TranslateCap("radio_frequency") .. activeFrequencyString)
-	if Config.Radio.canChangeVolume then
+	if Config.radio.canChangeVolume then
 		RageUI.Separator(_U("radio_volume") .. radioVolume .. "%")
 	end
 	RageUI.Separator("")
@@ -20,7 +20,7 @@ function main_showContentThisFrame()
 					return
 				end
 				isRadioActive = true
-				if Config.Radio.Sounds.radioOn then
+				if Config.radio.sounds.radioOn then
 					SendNUIMessage({ sound = "audio_on", volume = 0.3 })
 				end
 				exports["pma-voice"]:setRadioChannel(activeFrequency)
@@ -31,7 +31,7 @@ function main_showContentThisFrame()
 		RageUI.ButtonWithStyle(_U("disable_radio"), _U("disable_radio_desc"), {}, true, function(_, _, Selected)
 			if Selected then
 				isRadioActive = false
-				if Config.Radio.Sounds.radioOff then
+				if Config.radio.sounds.radioOff then
 					SendNUIMessage({ sound = "audio_off", volume = 0.3 })
 				end
 				exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
@@ -45,7 +45,7 @@ function main_showContentThisFrame()
 		not isRadioActive,
 		function(_, _, Selected)
 			if Selected then
-				local newFrequency = textEntry(_U("text_entry_desc"), "", Config.Radio.maxFrequencySize)
+				local newFrequency = textEntry(_U("text_entry_desc"), "", Config.radio.maxFrequencySize)
 				if newFrequency == nil then
 					return
 				end
@@ -59,9 +59,9 @@ function main_showContentThisFrame()
 					return
 				end
 				local canJoinFrequency = false
-				if Config.Radio.PrivateJobsFrequency[tonumber(newFrequency)] ~= nil then
+				if Config.radio.privateJobsFrequency[tonumber(newFrequency)] ~= nil then
 					local PlayerData = ESX.GetPlayerData()
-					for _, v in pairs(Config.Radio.PrivateJobsFrequency[tonumber(newFrequency)]) do
+					for _, v in pairs(Config.radio.privateJobsFrequency[tonumber(newFrequency)]) do
 						if v == PlayerData.job.name then
 							canJoinFrequency = true
 						end
@@ -77,7 +77,7 @@ function main_showContentThisFrame()
 			end
 		end
 	)
-	if Config.Radio.canChangeVolume then
+	if Config.radio.canChangeVolume then
 		RageUI.Progress(
 			_U("change_radio_volume") .. " (" .. radioVolume .. "%)",
 			radioVolume / 10,

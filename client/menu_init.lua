@@ -14,12 +14,12 @@ activeFrequencyString = nil
 
 -- Menu texture initialization
 -- create the menu texture with the config parameters
-if Config.MenuStyle.BannerStyle.ImageUrl ~= nil then
+if Config.menuStyle.bannerStyle.imageUrl ~= nil then
 	local runtimeTXD = CreateRuntimeTxd("radio_custom_header")
 	local Object = CreateDui(
-		Config.MenuStyle.BannerStyle.ImageUrl,
-		Config.MenuStyle.BannerStyle.ImageSize.Width,
-		Config.MenuStyle.BannerStyle.ImageSize.Height
+		Config.menuStyle.bannerStyle.imageUrl,
+		Config.menuStyle.bannerStyle.imageSize.Width,
+		Config.menuStyle.bannerStyle.imageSize.Height
 	)
 	_G.Object = Object
 	local objectTexture = GetDuiHandle(Object)
@@ -50,20 +50,20 @@ function openMenu()
 	_var.menus.radio.rageObject = RageUI.CreateMenu(
 		_("menu_title"),
 		_U("menu_subtitle"),
-		Config.MenuStyle.Margins.left,
-		Config.MenuStyle.Margins.top,
+		Config.menuStyle.margins.left,
+		Config.menuStyle.margins.top,
 		menuTexture,
 		menuTexture
 	)
-	if Config.MenuStyle.BannerStyle.ImageUrl == nil then
+	if Config.menuStyle.bannerStyle.imageUrl == nil then
 		_var.menus.radio.rageObject:SetRectangleBanner(
-			Config.MenuStyle.BannerStyle.Color.r,
-			Config.MenuStyle.BannerStyle.Color.g,
-			Config.MenuStyle.BannerStyle.Color.b,
-			Config.MenuStyle.BannerStyle.Color.a
+			Config.menuStyle.bannerStyle.color.r,
+			Config.menuStyle.bannerStyle.color.g,
+			Config.menuStyle.bannerStyle.color.b,
+			Config.menuStyle.bannerStyle.color.a
 		)
 	end
-	_var.menus.radio.rageObject:SetStyleSize(Config.MenuStyle.BannerStyle.widthOffset)
+	_var.menus.radio.rageObject:SetStyleSize(Config.menuStyle.bannerStyle.widthOffset)
 	RageUI.Visible(_var.menus.radio.rageObject, not RageUI.Visible(_var.menus.radio.rageObject))
 
 	-- Functions to execute when opening the menu
@@ -72,7 +72,7 @@ function openMenu()
 
 	-- RageUI menu loop
 	while _var.menus.radio.rageObject do
-		exports["pma-voice"]:setVoiceProperty("micClicks", Config.Radio.Sounds.radioClicks)
+		exports["pma-voice"]:setVoiceProperty("micClicks", Config.radio.sounds.radioClicks)
 		if activeFrequency == 0 then
 			activeFrequencyString = _("frequency_color") .. _U("no_frequency_selected_menu")
 		else
@@ -80,9 +80,9 @@ function openMenu()
 		end
 		RageUI.IsVisible(
 			_var.menus.radio.rageObject,
-			Config.MenuStyle.BannerStyle.UseHeader,
-			Config.MenuStyle.BannerStyle.UseGlareEffect,
-			Config.MenuStyle.BannerStyle.UseInstructionalButtons,
+			Config.menuStyle.bannerStyle.useHeader,
+			Config.menuStyle.bannerStyle.useGlareEffect,
+			Config.menuStyle.bannerStyle.useInstructionalButtons,
 			function()
 				main_showContentThisFrame()
 			end,

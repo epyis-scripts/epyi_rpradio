@@ -81,7 +81,7 @@ end
 ---@param player ped
 ---@return void
 function disconnectRadioIfDead(player)
-	if not Config.Radio.disconnectRadioOnDeath then
+	if not Config.radio.disconnectRadioOnDeath then
 		return
 	end
 	if not IsEntityDead(player) then
@@ -98,7 +98,7 @@ end
 ---disconnectIfNoItem
 ---@return void
 function disconnectIfNoItem()
-	if not Config.Radio.useRadioAsItem then
+	if not Config.radio.useRadioAsItem then
 		return
 	end
 	ESX.TriggerServerCallback("epyi_rpradio:hasItem", function(result)
@@ -111,7 +111,7 @@ function disconnectIfNoItem()
 		activeFrequency = 0
 		isRadioActive = false
 		closeRadioMenuAnimation()
-	end, Config.Radio.radioItemName, 1)
+	end, Config.radio.radioItemName, 1)
 end
 
 ---playAnimWhenTalking
