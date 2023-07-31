@@ -21,8 +21,8 @@ end
 
 ---epyi_rpradio:OpenMenu → Execute the openMenu function
 ---@return void
-RegisterNetEvent("epyi_rpradio:OpenMenu")
-AddEventHandler("epyi_rpradio:OpenMenu", function()
+RegisterNetEvent("epyi_rpradio:openMenu")
+AddEventHandler("epyi_rpradio:openMenu", function()
 	openMenu()
 end)
 
