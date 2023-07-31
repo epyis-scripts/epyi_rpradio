@@ -64,7 +64,7 @@ function main_showContentThisFrame()
 						_var.menus.radio.cooldowns.items = false
 						return
 					end
-					if not onlyContainNumber(newFrequency) then
+					if string.find(newFrequency, "[%c%p%s%z%a]") then
 						ESX.ShowNotification(_U("only_numbers"))
 						_var.menus.radio.cooldowns.items = false
 						return

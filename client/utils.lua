@@ -19,16 +19,6 @@ function textEntry(textEntry, inputText, maxLength)
 	end
 end
 
----onlyContainNumber
----@param source string
----@return boolean
-function onlyContainNumber(source)
-	if not string.match(source, "^%d+$") then
-		return false
-	end
-	return true
-end
-
 ---epyi_rpradio:OpenMenu → Execute the openMenu function
 ---@return void
 RegisterNetEvent("epyi_rpradio:OpenMenu")
