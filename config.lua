@@ -1,5 +1,5 @@
 Config = { radio = {} }
-Config.Locale = GetConvar("epyi_rpradio:locale", "en") -- EN/FR/ES/IT/NL
+Config.Locale = GetConvar("epyi_rpradio:locale", "es") -- EN/FR/ES/IT/NL
 
 Config.menuStyle = {
 	margins = { left = 10, top = 10 }, -- [table] → Set the menu margins
