@@ -1,17 +1,3 @@
--- Variables initialization
--- init some local variables
-isMenuOpened = false
-menuCooldown = false
-activeFrequency = 0
-isRadioActive = false
-isTalkingOnRadio = false
-isPlayingTalkingAnim = false
-animDictionary = { "cellphone@", "cellphone@in_car@ds", "cellphone@str", "random@arrests" }
-animAnimation = { "cellphone_text_in", "cellphone_text_out", "cellphone_call_listen_a", "generic_radio_chatter" }
-propHandle = nil
-radioVolume = 100
-activeFrequencyString = nil
-
 -- Menu texture initialization
 -- create the menu texture with the config parameters
 if Config.menuStyle.bannerStyle.imageUrl ~= nil then
@@ -31,12 +17,12 @@ end
 ---@return void
 function openMenu()
 	-- Cooldown for realistic animation
-	if menuCooldown then
+	if _var.menus.radio.cooldowns.open then
 		return
 	end
-	menuCooldown = true
+	_var.menus.radio.cooldowns.open = true
 	Citizen.SetTimeout(800, function()
-		menuCooldown = false
+		_var.menus.radio.cooldowns.open = false
 	end)
 
 	-- Close menu if already opened
@@ -73,10 +59,10 @@ function openMenu()
 	-- RageUI menu loop
 	while _var.menus.radio.rageObject do
 		exports["pma-voice"]:setVoiceProperty("micClicks", Config.radio.sounds.radioClicks)
-		if activeFrequency == 0 then
-			activeFrequencyString = _("frequency_color") .. _U("no_frequency_selected_menu")
+		if _var.menus.radio.activeFrequency == 0 then
+			_var.menus.radio.activeFrequencyString = _("frequency_color") .. _U("no_frequency_selected_menu")
 		else
-			activeFrequencyString = _("frequency_color") .. activeFrequency .. _("frequency_symbol")
+			_var.menus.radio.activeFrequencyString = _("frequency_color") .. _var.menus.radio.activeFrequency .. _("frequency_symbol")
 		end
 		RageUI.IsVisible(
 			_var.menus.radio.rageObject,

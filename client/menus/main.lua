@@ -2,35 +2,35 @@
 ---@return void
 function main_showContentThisFrame()
 	RageUI.Separator("")
-	if isRadioActive then
+	if _var.menus.radio.isRadioActive then
 		RageUI.Separator(TranslateCap("radio_state") .. Translate("state_on"))
 	else
 		RageUI.Separator(TranslateCap("radio_state") .. Translate("state_off"))
 	end
-	RageUI.Separator(TranslateCap("radio_frequency") .. activeFrequencyString)
+	RageUI.Separator(TranslateCap("radio_frequency") .. _var.menus.radio.activeFrequencyString)
 	if Config.radio.canChangeVolume then
-		RageUI.Separator(_U("radio_volume") .. radioVolume .. "%")
+		RageUI.Separator(_U("radio_volume") .. _var.menus.radio.radioVolume .. "%")
 	end
 	RageUI.Separator("")
-	if not isRadioActive then
+	if not _var.menus.radio.isRadioActive then
 		RageUI.ButtonWithStyle(_U("enable_radio"), _U("enable_radio_desc"), {}, true, function(_, _, Selected)
 			if Selected then
-				if activeFrequency == 0 then
+				if _var.menus.radio.activeFrequency == 0 then
 					ESX.ShowNotification(_U("no_frequency_selected_notif"))
 					return
 				end
-				isRadioActive = true
+				_var.menus.radio.isRadioActive = true
 				if Config.radio.sounds.radioOn then
 					SendNUIMessage({ sound = "audio_on", volume = 0.3 })
 				end
-				exports["pma-voice"]:setRadioChannel(activeFrequency)
+				exports["pma-voice"]:setRadioChannel(_var.menus.radio.activeFrequency)
 				exports["pma-voice"]:setVoiceProperty("radioEnabled", true)
 			end
 		end)
 	else
 		RageUI.ButtonWithStyle(_U("disable_radio"), _U("disable_radio_desc"), {}, true, function(_, _, Selected)
 			if Selected then
-				isRadioActive = false
+				_var.menus.radio.isRadioActive = false
 				if Config.radio.sounds.radioOff then
 					SendNUIMessage({ sound = "audio_off", volume = 0.3 })
 				end
@@ -42,7 +42,7 @@ function main_showContentThisFrame()
 		_U("change_frequency"),
 		_U("change_frequency_desc"),
 		{},
-		not isRadioActive,
+		not _var.menus.radio.isRadioActive,
 		function(_, _, Selected)
 			if Selected then
 				local newFrequency = textEntry(_U("text_entry_desc"), "", Config.radio.maxFrequencySize)
@@ -73,22 +73,22 @@ function main_showContentThisFrame()
 					ESX.ShowNotification(_U("cant_join_frequency"))
 					return
 				end
-				activeFrequency = tonumber(newFrequency)
+				_var.menus.radio.activeFrequency = tonumber(newFrequency)
 			end
 		end
 	)
 	if Config.radio.canChangeVolume then
 		RageUI.Progress(
-			_U("change_radio_volume") .. " (" .. radioVolume .. "%)",
-			radioVolume / 10,
+			_U("change_radio_volume") .. " (" .. _var.menus.radio.radioVolume .. "%)",
+			_var.menus.radio.radioVolume / 10,
 			10,
 			_U("change_radio_volume_desc"),
 			true,
 			true,
 			function(_, Active, _, Index)
-				radioVolume = math.round(Index * 10)
+				_var.menus.radio.radioVolume = math.round(Index * 10)
 				if Active then
-					exports["pma-voice"]:setRadioVolume(radioVolume)
+					exports["pma-voice"]:setRadioVolume(_var.menus.radio.radioVolume)
 				end
 			end
 		)

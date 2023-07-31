@@ -15,7 +15,7 @@ _threads.radio_active.enable = function()
 		while _threads.radio_active.isActivated do
 			local player = PlayerPedId()
 			AddEventHandler("pma-voice:radioActive", function(value)
-				isTalkingOnRadio = value
+				_var.menus.radio.isTalkingOnRadio = value
 			end)
 			playAnimWhenTalking(player)
 			disconnectIfNoItem()

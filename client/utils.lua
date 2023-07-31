@@ -39,13 +39,13 @@ end)
 ---closeRadioMenuAnimation → Play animation when closing radio menu
 ---@return void
 function closeRadioMenuAnimation()
-	DetachEntity(propHandle, true, false)
-	DeleteEntity(propHandle)
+	DetachEntity(_var.menus.radio.propHandle, true, false)
+	DeleteEntity(_var.menus.radio.propHandle)
 	local player = PlayerPedId()
 	local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
-	local animationType = 1 + (isMenuOpened and 0 or 1)
-	local dictionary = animDictionary[dictionaryType]
-	local animation = animAnimation[animationType]
+	local animationType = 1 + (_var.menus.radio.rageObject and 0 or 1)
+	local dictionary = _var.menus.radio.animDictionary[dictionaryType]
+	local animation = _var.menus.radio.animAnimation[animationType]
 	while not HasAnimDictLoaded(dictionary) do
 		Citizen.Wait(100)
 	end
@@ -60,16 +60,16 @@ function openRadioMenuAnimation()
 	local player = PlayerPedId()
 	local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
 	local animationType = 1 + (_var.menus.radio.rageObject and 0 or 1)
-	local dictionary = animDictionary[dictionaryType]
-	local animation = animAnimation[animationType]
+	local dictionary = _var.menus.radio.animDictionary[dictionaryType]
+	local animation = _var.menus.radio.animAnimation[animationType]
 	RequestModel(GetHashKey("prop_cs_hand_radio"))
 	while not HasModelLoaded(GetHashKey("prop_cs_hand_radio")) do
 		Citizen.Wait(100)
 	end
-	propHandle = CreateObject(GetHashKey("prop_cs_hand_radio"), 0.0, 0.0, 0.0, true, true, false)
+	_var.menus.radio.propHandle = CreateObject(GetHashKey("prop_cs_hand_radio"), 0.0, 0.0, 0.0, true, true, false)
 	local bone = GetPedBoneIndex(player, 28422)
 	SetCurrentPedWeapon(player, unarmed, true)
-	AttachEntityToEntity(propHandle, player, bone, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, false, false, false, 2, true)
+	AttachEntityToEntity(_var.menus.radio.propHandle, player, bone, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, false, false, false, 2, true)
 	RequestAnimDict(dictionary)
 	while not HasAnimDictLoaded(dictionary) do
 		Citizen.Wait(100)
@@ -87,11 +87,10 @@ function disconnectRadioIfDead(player)
 	if not IsEntityDead(player) then
 		return
 	end
-	RageUI.CloseAll()
-	isMenuOpened = false
+	RageUI.Visible(_var.menus.radio.rageObject, false)
 	exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
-	activeFrequency = 0
-	isRadioActive = false
+	_var.menus.radio.activeFrequency = 0
+	_var.menus.radio.isRadioActive = false
 	closeRadioMenuAnimation()
 end
 
@@ -105,11 +104,10 @@ function disconnectIfNoItem()
 		if result then
 			return
 		end
-		RageUI.CloseAll()
+		RageUI.Visible(_var.menus.radio.rageObject, false)
 		exports["pma-voice"]:setVoiceProperty("radioEnabled", false)
-		isMenuOpened = false
-		activeFrequency = 0
-		isRadioActive = false
+		_var.menus.radio.activeFrequency = 0
+		_var.menus.radio.isRadioActive = false
 		closeRadioMenuAnimation()
 	end, Config.radio.radioItemName, 1)
 end
@@ -119,23 +117,23 @@ end
 ---@return void
 function playAnimWhenTalking(player)
 	local broadcastType = 4 + (_var.menus.radio.rageObject and -1 or 0)
-	local broadcastDictionary = animDictionary[broadcastType]
-	local broadcastAnimation = animAnimation[broadcastType]
-	if isTalkingOnRadio and not isPlayingTalkingAnim then
-		isPlayingTalkingAnim = true
+	local broadcastDictionary = _var.menus.radio.animDictionary[broadcastType]
+	local broadcastAnimation = _var.menus.radio.animAnimation[broadcastType]
+	if _var.menus.radio.isTalkingOnRadio and not _var.menus.radio.isPlayingTalkingAnim then
+		_var.menus.radio.isPlayingTalkingAnim = true
 		RequestAnimDict(broadcastDictionary)
 		while not HasAnimDictLoaded(broadcastDictionary) do
 			Citizen.Wait(100)
 		end
 		TaskPlayAnim(player, broadcastDictionary, broadcastAnimation, 8.0, -8, -1, 49, 0, 0, 0, 0)
-	elseif not isTalkingOnRadio and isPlayingTalkingAnim then
-		isPlayingTalkingAnim = false
+	elseif not _var.menus.radio.isTalkingOnRadio and _var.menus.radio.isPlayingTalkingAnim then
+		_var.menus.radio.isPlayingTalkingAnim = false
 		StopAnimTask(player, broadcastDictionary, broadcastAnimation, -4.0)
 		if _var.menus.radio.rageObject then
 			local dictionaryType = 1 + (IsPedInAnyVehicle(player, false) and 1 or 0)
 			local animationType = 1 + (_var.menus.radio.rageObject and 0 or 1)
-			local dictionary = animDictionary[dictionaryType]
-			local animation = animAnimation[animationType]
+			local dictionary = _var.menus.radio.animDictionary[dictionaryType]
+			local animation = _var.menus.radio.animAnimation[animationType]
 			TaskPlayAnim(player, dictionary, animation, 4.0, -1, -1, 50, 0, false, false, false)
 		end
 	end
@@ -144,7 +142,7 @@ end
 ---stopThreadLegacy
 ---@return void
 function stopThreadLegacy()
-	if isRadioActive then
+	if _var.menus.radio.isRadioActive then
 		return
 	end
 	_threads.radio_active.disable()
