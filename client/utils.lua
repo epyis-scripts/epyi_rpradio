@@ -59,7 +59,23 @@ function openRadioMenuAnimation()
 	_var.menus.radio.propHandle = CreateObject(GetHashKey("prop_cs_hand_radio"), 0.0, 0.0, 0.0, true, true, false)
 	local bone = GetPedBoneIndex(player, 28422)
 	SetCurrentPedWeapon(player, unarmed, true)
-	AttachEntityToEntity(_var.menus.radio.propHandle, player, bone, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, true, false, false, false, 2, true)
+	AttachEntityToEntity(
+		_var.menus.radio.propHandle,
+		player,
+		bone,
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		0.0,
+		true,
+		false,
+		false,
+		false,
+		2,
+		true
+	)
 	RequestAnimDict(dictionary)
 	while not HasAnimDictLoaded(dictionary) do
 		Citizen.Wait(100)

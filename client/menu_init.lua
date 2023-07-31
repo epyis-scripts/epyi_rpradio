@@ -62,7 +62,9 @@ function openMenu()
 		if _var.menus.radio.activeFrequency == 0 then
 			_var.menus.radio.activeFrequencyString = _("frequency_color") .. _U("no_frequency_selected_menu")
 		else
-			_var.menus.radio.activeFrequencyString = _("frequency_color") .. _var.menus.radio.activeFrequency .. _("frequency_symbol")
+			_var.menus.radio.activeFrequencyString = _("frequency_color")
+				.. _var.menus.radio.activeFrequency
+				.. _("frequency_symbol")
 		end
 		RageUI.IsVisible(
 			_var.menus.radio.rageObject,
