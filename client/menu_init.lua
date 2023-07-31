@@ -76,12 +76,14 @@ function openMenu()
 				-- panels
 			end
 		)
-		if not RageUI.Visible(_var.menus.radio.rageObject) then
+		if not RageUI.Visible(_var.menus.radio.rageObject) and not _var.menus.radio.cooldowns.items then
 			_var.menus.radio.rageObject = RMenu:DeleteType("_var.menus.radio.rageObject", true)
 
 			-- Function to execute when closing the menu
 			stopThreadLegacy()
 			closeRadioMenuAnimation()
+		else
+			RageUI.Visible(_var.menus.radio.rageObject, true)
 		end
 		Citizen.Wait(0)
 	end
