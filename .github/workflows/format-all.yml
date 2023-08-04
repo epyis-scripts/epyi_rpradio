@@ -40,4 +40,4 @@ jobs:
         with:
           commit_user_name: ESX GITHUB ACTIONS BOT
           commit_user_email: esx-github-actions-bot@users.noreply.github.com
-          commit_message: :art:Code formatted in all files
+          commit_message: formatting(all) Github action auto formatting
