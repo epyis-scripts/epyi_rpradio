@@ -24,4 +24,4 @@ Citizen.CreateThread(function()
 		end
 	end
 	PerformHttpRequest("https://raw.githubusercontent.com/epyis-scripts/epyi_rpradio/main/version", checkVersion, "GET")
-end)
+end) 
