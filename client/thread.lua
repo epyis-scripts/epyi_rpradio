@@ -20,7 +20,7 @@ _threads.radio_active.enable = function()
 			playAnimWhenTalking(player)
 			disconnectIfNoItem()
 			disconnectRadioIfDead(player)
-			Citizen.Wait(100)
+			Citizen.Wait(1000)
 		end
 	end)
 end
