@@ -4,7 +4,7 @@ game("gta5")
 name("epyi_rpradio")
 description("RageUI Radio script for pma-voice API")
 author("Epyi (https://discord.gg/VyRPheG6Es)")
-version("1.7.0")
+version("1.7.1")
 
 ui_page("ui/index.html")
 
